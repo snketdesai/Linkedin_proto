@@ -9,6 +9,7 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var profile = require('./routes/profile');
+var job = require('./routes/jobs');
 var AWS = require('aws-sdk');
 var events = require('events');
 var EventEmitter = events.EventEmitter;
@@ -44,11 +45,8 @@ var attachDynamo = function(req,res,next){
 }
 
 
-
 app.post('/bio',attachDynamo,profile.insertBio)
 app.get('/bio/:userid',attachDynamo,profile.getBio);
-
-
 
 app.post('/certification', attachDynamo, profile.insertCertification);
 app.get('/certification/:userid',attachDynamo,profile.getCertification);
@@ -58,6 +56,10 @@ app.get('/college/:userid', attachDynamo, profile.getCollege);
 
 app.post('/skill', attachDynamo, profile.insertSkill);
 app.get('/skill/:userid', attachDynamo, profile.getSkill);
+
+app.get('/jobs',job.getJobs);
+app.get('/company/:companyId/jobs',job.getJobsByCompany);
+app.get('/company/:companyId/jobs/:jobId',job.getJobDetails)
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
