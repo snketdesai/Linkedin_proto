@@ -68,3 +68,18 @@ exports.insertJobDetails = function(req,res){
 		}
 	});
 }
+
+exports.deleteJob = function(req,res){
+	var jobId = req.params.jobId;
+	job.deleteJob(jobId,function(err,data){
+		if(err){
+			  res.writeHead(400);
+			  res.end("Error while deleting record\n");
+		}
+		else{		
+			 res.writeHead(200);
+			 res.end("Record Deleted successfully");
+			
+		}
+	});
+}

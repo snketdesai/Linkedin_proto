@@ -61,6 +61,9 @@ app.get('/jobs',job.getJobs);
 app.get('/company/:companyId/jobs',job.getJobsByCompany);
 app.post('/company/:companyId/jobs/',job.insertJobDetails);
 app.get('/company/:companyId/jobs/:jobId',job.getJobDetails);
+app.delete('/company/:companyId/jobs/:jobId',job.deleteJob);
+
+
 
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -55,3 +55,14 @@ exports.insertJob = function(companyId, jobTitle, jobDesc, expiryDate,
 		callback( err, data );
     });
 }
+
+//Method to delete job
+
+exports.deleteJob = function(jobId,callback){
+	db
+	.table('jobs')
+	.where('jobId').eq(jobId)
+	.delete(function(err,data){
+		callback(err,data);
+	});
+}
