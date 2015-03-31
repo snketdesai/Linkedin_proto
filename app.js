@@ -59,7 +59,9 @@ app.get('/skill/:userid', attachDynamo, profile.getSkill);
 
 app.get('/jobs',job.getJobs);
 app.get('/company/:companyId/jobs',job.getJobsByCompany);
-app.get('/company/:companyId/jobs/:jobId',job.getJobDetails)
+app.post('/company/:companyId/jobs/',job.insertJobDetails);
+app.get('/company/:companyId/jobs/:jobId',job.getJobDetails);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

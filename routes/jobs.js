@@ -49,3 +49,22 @@ exports.getJobs = function(req,res){
 		}
 	});
 }
+
+exports.insertJobDetails = function(req,res){
+	var companyId = req.params.companyId;
+	var jobTitle= req.body.jobTitle;
+	var jobDesc=req.body.jobDesc;
+	var expiryDate=req.body.expiryDate;
+	var location=req.body.location;
+	job.insertJob(companyId,jobTitle,jobDesc,expiryDate,location,function(err,data){
+		if(err){
+			  res.writeHead(400);
+			  res.end("Error while inserting data\n");
+		}
+		else{		
+			 res.writeHead(200);
+			 res.end("Record Inserted successfully");
+			
+		}
+	});
+}
