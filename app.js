@@ -10,6 +10,7 @@ var http = require('http');
 var path = require('path');
 var profile = require('./routes/profile');
 var job = require('./routes/jobs');
+var user = require('./routes/users');
 var AWS = require('aws-sdk');
 var events = require('events');
 var EventEmitter = events.EventEmitter;
@@ -44,6 +45,10 @@ var attachDynamo = function(req,res,next){
 	next();
 }
 
+
+app.post('/signUp',user.signUp);
+app.post('/signIn',user.signIn);
+app.post('/checkForExistingUser',user.IsUserPresent);
 
 app.post('/bio',attachDynamo,profile.insertBio)
 app.get('/bio/:userid',attachDynamo,profile.getBio);
