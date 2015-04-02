@@ -30,6 +30,18 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+/*app.use(multer({ dest: './uploads/',
+ rename: function (fieldname, filename) {
+    return filename+Date.now();
+  },
+onFileUploadStart: function (file) {
+  console.log(file.originalname + ' is starting ...')
+},
+onFileUploadComplete: function (file) {
+  console.log(file.fieldname + ' uploaded to  ' + file.path)
+  done=true;
+}
+}));*/
 
 // development only
 if ('development' == app.get('env')) {
@@ -70,9 +82,12 @@ app.get('/company/:companyId/jobs/:jobId',job.getJobDetails);
 app.delete('/company/:companyId/jobs/:jobId',job.deleteJob);
 
 app.get('/sample', companyprofile.getView);
+app.get('/registercompanypage', companyprofile.getCompanyRegisterView);
+app.get('/companyprofilepage', companyprofile.getCompanyView);
 
 app.post('/company',companyprofile.insertCompanyProfile);
 app.get('/company/:companyId',companyprofile.getCompanyProfile);
+app.post('/company/:companyId/name',companyprofile.updateCompanyName);
 app.post('/company/:companyId/overview',companyprofile.updateCompanyOverview);
 app.post('/company/:companyId/url',companyprofile.updateCompanyURL);
 app.post('/company/:companyId/logo',companyprofile.updateCompanyLogo);

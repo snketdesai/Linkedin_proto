@@ -4,18 +4,16 @@ var dynomoDb;
 var pool;
 
 var $credentials = {
-	    "accessKeyId": "xyz", 
-	    "secretAccessKey": "xyz", 
+	    "accessKeyId": "AKIAJRNCQQ3RPLJCQEQA", 
+	    "secretAccessKey": "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", 
 	    "region": "us-west-1"
 }
 
 function getDBconnection(){
 	if(dynomoDb){
-		console.log("If");
 		return dynomoDb;
 	}
 	else{
-		console.log("else");
 		var dynomoDb = require('aws-dynamodb')($credentials)
 		return dynomoDb;
 	}

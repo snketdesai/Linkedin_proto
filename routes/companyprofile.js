@@ -1,9 +1,18 @@
 var dbConn = require('../model/dbConnection');
 var db = dbConn.getDBconnection();
 var uuid = require('node-uuid');
+var multer  = require('multer');
 
 exports.getView = function(req,res){
 	res.render('sample');
+}
+
+exports.getCompanyView = function(req,res){
+	res.render('companyprofile');
+}
+
+exports.getCompanyRegisterView = function(req,res){
+	res.render('registercompanydetails');
 }
 
 exports.getCompanyProfile = function(req,res){
@@ -42,6 +51,25 @@ exports.insertCompanyProfile = function(req,res){
 			res.status(200).json({msg:'insert success', companyId:companyId});
 		}
     });
+}
+
+
+
+exports.updateCompanyName = function(req,res){
+	var companyId = req.params.companyId;
+	var name = req.body.name;
+	
+	db.table('companyprofile').where('companyId').eq(companyId).update({
+		companyName : name
+	}, function( err, data ) {
+		if(err){
+			console.log( err );
+			res.status(400).json({errmsg:err});
+		}else{
+			console.log( data );
+			res.status(200).json({msg:'update success'});
+		}
+	});
 }
 
 exports.updateCompanyOverview = function(req,res){
