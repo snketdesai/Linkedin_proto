@@ -35,9 +35,9 @@ exports.insertCertification = function(req,res){
 			
 		}
 	});
-},
+}
 
-exports.insertSkill = function(req,res){
+/*exports.insertSkill = function(req,res){
 	var userid = req.params.userid;
 	var skill = req.body;
 	
@@ -70,7 +70,7 @@ exports.insertCollege = function(req,res){
 		}
 	});
 }
-
+*/
 
 /*exports.insertBio = function(req,res){
 	var dynamo = req.dynamo;
