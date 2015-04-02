@@ -13,7 +13,7 @@ exports.getAllJobs = function(callback) {
 	db.table('jobs').scan(function(err, data) {
 		callback(err, data);
 	})
-}
+},
 
 // Method to get job by company Id
 

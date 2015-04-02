@@ -11,6 +11,7 @@ var path = require('path');
 var profile = require('./routes/profile');
 var job = require('./routes/jobs');
 var user = require('./routes/users');
+var companyprofile = require('./routes/companyprofile');
 var AWS = require('aws-sdk');
 var events = require('events');
 var EventEmitter = events.EventEmitter;
@@ -68,8 +69,15 @@ app.post('/company/:companyId/jobs/',job.insertJobDetails);
 app.get('/company/:companyId/jobs/:jobId',job.getJobDetails);
 app.delete('/company/:companyId/jobs/:jobId',job.deleteJob);
 
+app.get('/sample', companyprofile.getView);
 
-
+app.post('/company',companyprofile.insertCompanyProfile);
+app.get('/company/:companyId',companyprofile.getCompanyProfile);
+app.post('/company/:companyId/overview',companyprofile.updateCompanyOverview);
+app.post('/company/:companyId/url',companyprofile.updateCompanyURL);
+app.post('/company/:companyId/logo',companyprofile.updateCompanyLogo);
+app.post('/company/:companyId/followers',companyprofile.addCompanyFollower);
+app.post('/company/:companyId/status',companyprofile.updateCompanyStatus);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

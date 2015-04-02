@@ -1,0 +1,160 @@
+<html>
+<head>
+
+	<meta name="viewport" content="width=768">
+
+	<style type="text/css">
+		body{margin:0; padding:0; text-align:center;}
+		#wrapper{position:relative; margin:0 auto}
+		#expanded{position:absolute; background:white}
+	</style>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$( "#send" ).click(function() {
+		  		var companyObj = {
+					companyName : "companyName",
+					overview : "overview",
+					url : "url",
+					logo : "logo"
+				};
+
+				$.ajax({
+					type: "POST",
+					url: "/company",
+					contentType: "application/json; charset=UTF-8",
+					dataType: 'json',
+					data: JSON.stringify(companyObj),
+					crossDomain : true,
+					success: function( d ) {
+			 			 console.log(d);
+					}
+				});
+			});
+			
+			$( "#get" ).click(function() {
+				$.ajax({
+					type: "GET",
+					url: "/company/"+document.getElementById('compid').value,
+					crossDomain : true,
+					success: function( d ) {
+			 			 console.log(d);
+					}
+				});
+			});
+			
+			$( "#overview" ).click(function() {
+				var overview = document.getElementById('overviewText').value;
+		  		var overviewObj = {
+					overview : overview
+				};
+
+				$.ajax({
+					type: "POST",
+					url: "/company/"+document.getElementById('compid').value+"/overview",
+					contentType: "application/json; charset=UTF-8",
+					dataType: 'json',
+					data: JSON.stringify(overviewObj),
+					crossDomain : true,
+					success: function( d ) {
+			 			 console.log(d);
+					}
+				});
+			});
+			
+			$( "#url" ).click(function() {
+				var urlO = document.getElementById('urlText').value;
+		  		var urlObj = {
+					urlO : urlO
+				};
+
+				$.ajax({
+					type: "POST",
+					url: "/company/"+document.getElementById('compid').value+"/url",
+					contentType: "application/json; charset=UTF-8",
+					dataType: 'json',
+					data: JSON.stringify(urlObj),
+					crossDomain : true,
+					success: function( d ) {
+			 			 console.log(d);
+					}
+				});
+			});
+			
+			$( "#logo" ).click(function() {
+				var logo = document.getElementById('logoText').value;
+		  		var logoObj = {
+					logo : logo
+				};
+
+				$.ajax({
+					type: "POST",
+					url: "/company/"+document.getElementById('compid').value+"/logo",
+					contentType: "application/json; charset=UTF-8",
+					dataType: 'json',
+					data: JSON.stringify(logoObj),
+					crossDomain : true,
+					success: function( d ) {
+			 			 console.log(d);
+					}
+				});
+			});
+			
+			$( "#status" ).click(function() {
+				var status = document.getElementById('statusText').value;
+		  		var statusObj = {
+					status : status
+				};
+
+				$.ajax({
+					type: "POST",
+					url: "/company/"+document.getElementById('compid').value+"/status",
+					contentType: "application/json; charset=UTF-8",
+					dataType: 'json',
+					data: JSON.stringify(statusObj),
+					crossDomain : true,
+					success: function( d ) {
+			 			 console.log(d);
+					}
+				});
+			});
+			
+			$( "#follower" ).click(function() {
+
+				$.ajax({
+					type: "POST",
+					url: "/company/"+document.getElementById('compid').value+"/followers",
+					crossDomain : true,
+					success: function( d ) {
+			 			 console.log(d);
+					}
+				});
+			});
+		});
+		
+	</script>
+</head>
+<body>
+	<div id="wrapper">
+		<div id='expanded'>
+			<input type="button" id="send" value="send"><br><br><br>
+			<input type="text" id="compid"><br><br>
+			<input type="button" id="get" value="get"><br><br><br>
+			<input type="text" id="overviewText"><br><br>
+			<input type="button" id="overview" value="update overview"><br><br><br>
+			<input type="text" id="urlText"><br><br>
+			<input type="button" id="url" value="update url"><br><br><br>
+			<input type="text" id="logoText"><br><br>
+			<input type="button" id="logo" value="update logo"><br><br><br>
+			<input type="text" id="statusText"><br><br>
+			<input type="button" id="status" value="update status"><br><br><br>
+			<input type="button" id="follower" value="add follower"><br><br><br>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
