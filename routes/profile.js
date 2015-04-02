@@ -1,6 +1,78 @@
 
 // bio insert and get methods start here.............................
+
+var profile = require('../model/profileQueries');
+
 exports.insertBio = function(req,res){
+	var userid = req.params.userid;
+	var bio = req.body;
+	
+	profile.updateBio(userid,bio,function(err,data){
+		if(err){
+			  res.writeHead(400);
+			  res.end("Error while inserting data\n");
+		}
+		else{		
+			 res.writeHead(200);
+			 res.end("Record Inserted successfully");
+			
+		}
+	});
+},
+
+exports.insertCertification = function(req,res){
+	var userid = req.params.userid;
+	var certification = req.body;
+	
+	profile.updateCertification(certification,function(err,data){
+		if(err){
+			  res.writeHead(400);
+			  res.end("Error while inserting data\n");
+		}
+		else{		
+			 res.writeHead(200);
+			 res.end("Record Inserted successfully");
+			
+		}
+	});
+},
+
+exports.insertSkill = function(req,res){
+	var userid = req.params.userid;
+	var skill = req.body;
+	
+	profile.updateSkill(skill,function(err,data){
+		if(err){
+			  res.writeHead(400);
+			  res.end("Error while inserting data\n");
+		}
+		else{		
+			 res.writeHead(200);
+			 res.end("Record Inserted successfully");
+			
+		}
+	});
+},
+
+exports.insertCollege = function(req,res){
+	var userid = req.params.userid;
+	var college = req.body;
+	
+	profile.updateCollege(college,function(err,data){
+		if(err){
+			  res.writeHead(400);
+			  res.end("Error while inserting data\n");
+		}
+		else{		
+			 res.writeHead(200);
+			 res.end("Record Inserted successfully");
+			
+		}
+	});
+}
+
+
+/*exports.insertBio = function(req,res){
 	var dynamo = req.dynamo;
 	var body = req.body;
 	
@@ -233,5 +305,5 @@ exports.getSkill = function(req,res){
 			    	
 			      }
 	})
-}
+}*/
 //end of skills methods ....................................................

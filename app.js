@@ -36,7 +36,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-AWS.config.loadFromPath('./public/access.json');
+/*AWS.config.loadFromPath('./public/access.json');
 
 var dd = new AWS.DynamoDB();
 
@@ -45,22 +45,22 @@ var attachDynamo = function(req,res,next){
 	req.dynamo = dd;
 	next();
 }
-
+*/
 
 app.post('/signUp',user.signUp);
 app.post('/signIn',user.signIn);
 app.post('/checkForExistingUser',user.IsUserPresent);
 
-app.post('/bio',attachDynamo,profile.insertBio)
+app.post('/bio/:userid',attachDynamo,profile.insertBio)
 app.get('/bio/:userid',attachDynamo,profile.getBio);
 
-app.post('/certification', attachDynamo, profile.insertCertification);
+app.post('/certification/:userid', attachDynamo, profile.insertCertification);
 app.get('/certification/:userid',attachDynamo,profile.getCertification);
 
-app.post('/college', attachDynamo, profile.insertCollege);
+app.post('/college/:userid', attachDynamo, profile.insertCollege);
 app.get('/college/:userid', attachDynamo, profile.getCollege);
 
-app.post('/skill', attachDynamo, profile.insertSkill);
+app.post('/skill/:userid', attachDynamo, profile.insertSkill);
 app.get('/skill/:userid', attachDynamo, profile.getSkill);
 
 app.get('/jobs',job.getJobs);
