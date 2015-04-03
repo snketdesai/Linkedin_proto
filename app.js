@@ -12,7 +12,8 @@ var profile = require('./routes/profile');
 var job = require('./routes/jobs');
 var user = require('./routes/users');
 var companyprofile = require('./routes/companyprofile');
-var AWS = require('aws-sdk');
+var index = require('./routes/index');
+//var AWS = require('aws-sdk');
 var events = require('events');
 var EventEmitter = events.EventEmitter;
 var bodyParser = require('body-parser');
@@ -48,7 +49,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-AWS.config.loadFromPath('./public/access.json');
+/*AWS.config.loadFromPath('./public/access.json');
 
 var dd = new AWS.DynamoDB();
 
@@ -57,23 +58,24 @@ var attachDynamo = function(req,res,next){
 	req.dynamo = dd;
 	next();
 }
-
+*/
+app.get('/',index.login);
 
 app.post('/signUp',user.signUp);
 app.post('/signIn',user.signIn);
 app.post('/checkForExistingUser',user.IsUserPresent);
 
-app.post('/bio',attachDynamo,profile.insertBio)
-app.get('/bio/:userid',attachDynamo,profile.getBio);
+app.post('/bio/:userid',profile.insertBio)
+//app.get('/bio/:userid',profile.getBio);
 
-app.post('/certification', attachDynamo, profile.insertCertification);
-app.get('/certification/:userid',attachDynamo,profile.getCertification);
+app.post('/certification/:userid',profile.insertCertification);
+//app.get('/certification/:userid',profile.getCertification);
 
-app.post('/college', attachDynamo, profile.insertCollege);
-app.get('/college/:userid', attachDynamo, profile.getCollege);
+/*app.post('/college/:userid',profile.insertCollege);
+app.get('/college/:userid',  profile.getCollege);
 
-app.post('/skill', attachDynamo, profile.insertSkill);
-app.get('/skill/:userid', attachDynamo, profile.getSkill);
+app.post('/skill/:userid',profile.insertSkill);
+app.get('/skill/:userid', profile.getSkill);*/
 
 app.get('/jobs',job.getJobs);
 app.get('/company/:companyId/jobs',job.getJobsByCompany);
