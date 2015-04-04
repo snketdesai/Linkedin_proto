@@ -1,13 +1,27 @@
 var mysql = require('mysql2');
+var AWS = require('aws-sdk');
 
 var dynomoDb;
 var pool;
 
 var $credentials = {
-	    "accessKeyId": "xyz", 
-	    "secretAccessKey": "xyz", 
-	    "region": "us-west-1"
+		"accessKeyId": "AKIAITKWNLDTW2J4BNLA", 
+		"secretAccessKey": "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", 
+		"region": "us-west-1"
 }
+
+
+
+function getAWS_SDK(){
+	AWS.config.loadFromPath('./public/access.json');
+
+	var aws = new AWS.DynamoDB();
+	
+	return aws;
+}
+
+
+
 
 function getDBconnection(){
 	if(dynomoDb){
@@ -40,3 +54,4 @@ exports.getPoolInstance = function(){
 		
 };
 exports.getDBconnection = getDBconnection;
+exports.getAWSConnection = getAWS_SDK;

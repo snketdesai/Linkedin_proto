@@ -65,17 +65,15 @@ app.post('/signUp',user.signUp);
 app.post('/signIn',user.signIn);
 app.post('/checkForExistingUser',user.IsUserPresent);
 
-app.post('/bio/:userid',profile.insertBio)
-//app.get('/bio/:userid',profile.getBio);
-
+app.post('/bio/:userid',profile.insertBio);
 app.post('/certification/:userid',profile.insertCertification);
-//app.get('/certification/:userid',profile.getCertification);
-
-/*app.post('/college/:userid',profile.insertCollege);
-app.get('/college/:userid',  profile.getCollege);
-
 app.post('/skill/:userid',profile.insertSkill);
-app.get('/skill/:userid', profile.getSkill);*/
+app.post('/college/:userid',profile.insertCollege);
+app.post('/status/:userid',profile.insertStatus);
+app.post('/company_followed/:userid',profile.insertCompanyFollowed);
+app.post('/user_followed/:userid',profile.insertUserFollowed);
+//app.get('/certification/:userid',profile.getCertification);
+app.get("/profile/:userid",profile.getProfile);
 
 app.get('/jobs',job.getJobs);
 app.get('/company/:companyId/jobs',job.getJobsByCompany);
