@@ -77,9 +77,7 @@ app.get('/registercompanypage', companyprofile.getCompanyRegisterView);
 app.get('/companyprofilepage', companyprofile.getCompanyView);
 
 app.post('/company',companyprofile.insertCompanyProfile);
-
 app.post('/company/logoupload', companyprofile.insertLogo);
-
 app.get('/company/:companyId',companyprofile.getCompanyProfile);
 app.post('/company/:companyId/name',companyprofile.updateCompanyName);
 app.post('/company/:companyId/overview',companyprofile.updateCompanyOverview);
