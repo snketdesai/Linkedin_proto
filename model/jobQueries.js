@@ -37,7 +37,7 @@ exports.getJobDetails = function(jobId, callback) {
 
 // Method to insert Job
 
-exports.insertJob = function(companyId, jobTitle, jobDesc, expiryDate,
+exports.insertJob = function(companyId,companyName, jobTitle, jobDesc, expiryDate,
 		location, callback) {
 	var jobId = uuid.v1();
 	db
@@ -45,6 +45,7 @@ exports.insertJob = function(companyId, jobTitle, jobDesc, expiryDate,
 	.insert({
 		jobId : jobId,
 		companyId : companyId,
+		companyName : companyName,
 		jobTitle : jobTitle,
 		location : location,
 		jobDescription : jobDesc,

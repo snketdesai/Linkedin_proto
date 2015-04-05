@@ -50,11 +50,12 @@ exports.getJobs = function(req, res) {
 
 exports.insertJobDetails = function(req, res) {
 	var companyId = req.params.companyId;
+	var companyName = req.params.companyName;
 	var jobTitle = req.body.jobTitle;
 	var jobDesc = req.body.jobDesc;
 	var expiryDate = req.body.expiryDate;
 	var location = req.body.location;
-	job.insertJob(companyId, jobTitle, jobDesc, expiryDate, location, function(
+	job.insertJob(companyId,companyName, jobTitle, jobDesc, expiryDate, location, function(
 			err, data) {
 		if (err) {
 			res.writeHead(400);
