@@ -23,7 +23,7 @@ var app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '/views');
+app.set('views',__dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.favicon());
 app.use(express.logger('dev'));
@@ -65,6 +65,8 @@ app.post('/signUp',user.signUp);
 app.post('/signIn',user.signIn);
 app.post('/checkForExistingUser',user.IsUserPresent);
 
+
+
 app.post('/bio/:userid',profile.insertBio);
 app.post('/certification/:userid',profile.insertCertification);
 app.post('/skill/:userid',profile.insertSkill);
@@ -72,8 +74,8 @@ app.post('/college/:userid',profile.insertCollege);
 app.post('/status/:userid',profile.insertStatus);
 app.post('/company_followed/:userid',profile.insertCompanyFollowed);
 app.post('/user_followed/:userid',profile.insertUserFollowed);
-//app.get('/certification/:userid',profile.getCertification);
-app.get("/profile/:userid",profile.getProfile);
+
+app.get('/userprofile',profile.getUserProfile);
 
 app.get('/jobs',job.getJobs);
 app.get('/company/:companyId/jobs',job.getJobsByCompany);
