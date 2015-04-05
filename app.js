@@ -10,6 +10,7 @@ var http = require('http');
 var path = require('path');
 var profile = require('./routes/profile');
 var job = require('./routes/jobs');
+var jobapp = require('./routes/jobapplication');
 var user = require('./routes/users');
 var companyprofile = require('./routes/companyprofile');
 var index = require('./routes/index');
@@ -42,7 +43,11 @@ app.get('/',index.login);
 app.post('/signUp',user.signUp);
 app.post('/signIn',user.signIn);
 app.post('/checkForExistingUser',user.IsUserPresent);
+app.get('/usersearch/:firstName/:lastName', user.searchUsers);
 
+app.post('/application', jobapp.postJobApplication);
+app.get('/userapplication/:userId', jobapp.getJobApplication);
+app.post('/updatejobstatus/:jobId/:userId', jobapp.updateJobStatus);
 
 
 app.post('/bio/:userid',profile.insertBio);

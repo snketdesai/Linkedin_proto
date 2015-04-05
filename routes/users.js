@@ -38,6 +38,20 @@ exports.signIn = function(req,res){
 	});
 }
 
+exports.searchUsers = function(req,res){
+	console.log("searching for the user");
+	var firstName = req.params.firstName;
+	var lastName = req.params.lastName;
+	user.searchUser(firstName, lastName, function(err,data){
+		if(err){
+			res.writeHead(400);
+			res.end("Error while signing");
+		}else{
+			res.send(data);
+		}
+	});
+}
+
 exports.IsUserPresent = function(req,res){
 	console.log("___________IsUserPresent called_____________");
 	var email = req.body.email;
