@@ -24,6 +24,7 @@ exports.signUp = function(email, password, firstName, lastName,userType, callbac
 
 }
 
+
 exports.signIn = function(userName, password, callback) {
 
 	console.log("USERNAME: " + userName + " Password: " + password);
@@ -38,6 +39,27 @@ exports.signIn = function(userName, password, callback) {
 			} else {
 				console.log("no user with this credentials");
 				callback(err, resultlog);
+			}
+		});
+
+	});
+}
+
+
+exports.searchUsers = function(firstName, lastName, callback) {
+
+	console.log(" userId: " + userId);
+	var sql = 'SELECT firstname, lastname FROM users where firstname = ? and lastname = ?';
+	console.log(sql);
+	pool.getConnection(function(err, connection) {
+		connection.query(sql, [ firstName, lastName ], function(err, rows) {
+			console.log(rows);
+			if (rows.length !== 0) {
+				callback(err, rows);
+
+			} else {
+				console.log("no users exist with these search parameters");
+				callback(err, rows);
 			}
 		});
 

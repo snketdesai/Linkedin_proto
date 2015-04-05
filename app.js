@@ -10,14 +10,14 @@ var http = require('http');
 var path = require('path');
 var profile = require('./routes/profile');
 var job = require('./routes/jobs');
+var jobapp = require('./routes/jobapplication');
 var user = require('./routes/users');
 var companyprofile = require('./routes/companyprofile');
 var index = require('./routes/index');
-//var AWS = require('aws-sdk');
 var events = require('events');
 var EventEmitter = events.EventEmitter;
 var bodyParser = require('body-parser');
-
+var fs = require("fs");
 
 var app = express();
 
@@ -31,40 +31,23 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-/*app.use(multer({ dest: './uploads/',
- rename: function (fieldname, filename) {
-    return filename+Date.now();
-  },
-onFileUploadStart: function (file) {
-  console.log(file.originalname + ' is starting ...')
-},
-onFileUploadComplete: function (file) {
-  console.log(file.fieldname + ' uploaded to  ' + file.path)
-  done=true;
-}
-}));*/
+app.use(express.multipart());
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-/*AWS.config.loadFromPath('./public/access.json');
-
-var dd = new AWS.DynamoDB();
-
-var attachDynamo = function(req,res,next){
-
-	req.dynamo = dd;
-	next();
-}
-*/
 app.get('/',index.login);
 
 app.post('/signUp',user.signUp);
 app.post('/signIn',user.signIn);
 app.post('/checkForExistingUser',user.IsUserPresent);
+app.get('/usersearch/:firstName/:lastName', user.searchUsers);
 
+app.post('/application', jobapp.postJobApplication);
+app.get('/userapplication/:userId', jobapp.getJobApplication);
+app.post('/updatejobstatus/:jobId/:userId', jobapp.updateJobStatus);
 
 
 app.post('/bio/:userid',profile.insertBio);
@@ -79,10 +62,14 @@ app.get('/profile/:userid',profile.getProfile); //profile data
 
 app.get('/userprofile',profile.getUserProfile); //profile page
 
+app.get('/insertJobDetailsPage',job.showInsertJobDetailsView);
+app.get('/showJobDetailsPage/:jobId',job.showJobDetailsView);
+app.get('/showJobs',job.showJobsView);
+
 app.get('/jobs',job.getJobs);
+app.get('/jobs/:jobId',job.getJobDetails);
 app.get('/company/:companyId/jobs',job.getJobsByCompany);
 app.post('/company/:companyId/jobs/',job.insertJobDetails);
-app.get('/company/:companyId/jobs/:jobId',job.getJobDetails);
 app.delete('/company/:companyId/jobs/:jobId',job.deleteJob);
 
 app.get('/sample', companyprofile.getView);
@@ -90,6 +77,7 @@ app.get('/registercompanypage', companyprofile.getCompanyRegisterView);
 app.get('/companyprofilepage', companyprofile.getCompanyView);
 
 app.post('/company',companyprofile.insertCompanyProfile);
+app.post('/company/logoupload', companyprofile.insertLogo);
 app.get('/company/:companyId',companyprofile.getCompanyProfile);
 app.post('/company/:companyId/name',companyprofile.updateCompanyName);
 app.post('/company/:companyId/overview',companyprofile.updateCompanyOverview);

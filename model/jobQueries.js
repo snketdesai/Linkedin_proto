@@ -26,11 +26,10 @@ exports.getJobsByCompanyId = function(companyId, callback) {
 
 // Method to get job details by job id
 
-exports.getJobDetails = function(companyId, jobId, callback) {
-	console.log("CompanyId__________-" + companyId);
+exports.getJobDetails = function(jobId, callback) {
 	console.log("JobId__________" + jobId);
 
-	db.table('jobs').where('jobId').eq(Number(jobId)).get(function(err, data) {
+	db.table('jobs').where('jobId').eq(jobId).get(function(err, data) {
 		console.log(err, data);
 		callback(err, data);
 	});
@@ -38,7 +37,7 @@ exports.getJobDetails = function(companyId, jobId, callback) {
 
 // Method to insert Job
 
-exports.insertJob = function(companyId, jobTitle, jobDesc, expiryDate,
+exports.insertJob = function(companyId,companyName, jobTitle, jobDesc, expiryDate,
 		location, callback) {
 	var jobId = uuid.v1();
 	db
@@ -46,6 +45,7 @@ exports.insertJob = function(companyId, jobTitle, jobDesc, expiryDate,
 	.insert({
 		jobId : jobId,
 		companyId : companyId,
+		companyName : companyName,
 		jobTitle : jobTitle,
 		location : location,
 		jobDescription : jobDesc,

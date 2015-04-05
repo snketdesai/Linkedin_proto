@@ -1,8 +1,5 @@
-
-
-
 var profile = require('../model/profileQueries');
-var multer  = require('multer');
+//var multer  = require('multer');
 exports.insertBio = function(req,res){
 	var userid = req.params.userid;
 	var bio = req.body.bio;
