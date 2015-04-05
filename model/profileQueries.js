@@ -193,7 +193,7 @@ exports.getProfileInfo = function(userid,callback){
 		        }
 		},
 		"AttributesToGet":[
-			"bio","certification","skills","college","status","company_followed","user_followed"
+			"bio","certification","skill","college","status","company_followed","user_followed"
 		],
 		"TableName":"user_profile"	
 		},

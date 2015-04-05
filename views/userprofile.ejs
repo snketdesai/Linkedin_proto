@@ -52,11 +52,11 @@
                 
                 <div class="form-group">
                   <label for="overview">Bio</label>
-                  <textarea id="overviewText" class="form-control" id="overview"></textarea><button id="saveoverview" class="btn btn-link pull-right" type="button">save</button><button id="editoverview" class="btn btn-link pull-right" type="button">edit</button>
+                  <textarea id="bio" class="form-control" disabled></textarea><button id="saveBio" class="btn btn-link pull-right" type="button">save</button><button id="editBio" class="btn btn-link pull-right" type="button">edit</button>
                 </div>
                 <div class="form-group">
                   <label for="website">Status</label>
-                  <input id="urlText" type="text" class="form-control" id="website"><button id="saveurl" class="btn btn-link pull-right" type="button">save</button><button id="editurl" class="btn btn-link pull-right" type="button">edit</button>
+                  <input id="status" type="text" class="form-control" disabled><button id="saveStatus" class="btn btn-link pull-right" type="button">save</button><button id="editStatus" class="btn btn-link pull-right" type="button">edit</button>
                 </div>
                 
             </form>
@@ -71,11 +71,11 @@
               <form>
                   <div class="form-group">
                     <label for="college">College</label>
-                    <input type="text" class="form-control" id="college" placeholder="Enter College"> <button id="editcollege" class="btn btn-link pull-right" type="button">Add College</button>
+                    <input id="college" type="text" class="form-control" placeholder="Enter College" disabled> <button id="saveCollege" class="btn btn-link pull-right" type="button">save</button><button id="addCollege" class="btn btn-link pull-right" type="button">Add College</button>
                   </div>
                   <div class="form-group">
                     <label for="skills">Skills</label>
-                    <textarea class="form-control" id="skills" placeholder="Skills"></textarea><button id="editskills" class="btn btn-link pull-right" type="button">Add Skills</button>
+                    <textarea id="skill" class="form-control" placeholder="Skills" disabled></textarea><button id="saveSkill" class="btn btn-link pull-right" type="button">save</button><button id="addSkill" class="btn btn-link pull-right" type="button">Add Skills</button>
                   </div>
                  <!-- <div class="form-group">
                     <label for="expiry">Expiry Date</label><br>
@@ -83,7 +83,7 @@
                   </div>-->
                   <div class="form-group">
                     <label for="certification">Certification</label>
-                    <input type="text" class="form-control" id="location" placeholder="Certification"></textarea> <button id="editcertification" class="btn btn-link pull-right" type="button">Add certificates</button>
+                    <input id="certification" type="text" class="form-control" placeholder="Certification" disabled></textarea> <button id="saveCertification" class="btn btn-link pull-right" type="button">save</button><button id="addCertification" class="btn btn-link pull-right" type="button">Add Certificates</button>
                   </div>
                   <!--<button class="btn btn-success pull-right" type="button">Post Job</button><ul class="list-inline"><li></li></ul>-->
               </form>
@@ -113,9 +113,9 @@
            <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Following Users</h4></div>
           <div class="panel-body">
             <ul class="list-group">
-            <li class="list-group-item">Modals</li>
-            <li class="list-group-item">Sliders / Carousel</li>
-            <li class="list-group-item">Thumbnails</li>
+            <li id="user1" class="list-group-item"></li>
+            <li id="user2" class="list-group-item"></li>
+            <li id="user3" class="list-group-item"></li>
             </ul>
           </div>
          </div>
