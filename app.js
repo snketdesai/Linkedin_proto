@@ -79,10 +79,14 @@ app.get('/profile/:userid',profile.getProfile); //profile data
 
 app.get('/userprofile',profile.getUserProfile); //profile page
 
+app.get('/insertJobDetailsPage',job.showInsertJobDetailsView);
+app.get('/showJobDetailsPage/:jobId',job.showJobDetailsView);
+app.get('/showJobs',job.showJobsView);
+
 app.get('/jobs',job.getJobs);
+app.get('/jobs/:jobId',job.getJobDetails);
 app.get('/company/:companyId/jobs',job.getJobsByCompany);
 app.post('/company/:companyId/jobs/',job.insertJobDetails);
-app.get('/company/:companyId/jobs/:jobId',job.getJobDetails);
 app.delete('/company/:companyId/jobs/:jobId',job.deleteJob);
 
 app.get('/sample', companyprofile.getView);

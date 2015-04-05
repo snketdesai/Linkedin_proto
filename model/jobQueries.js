@@ -26,11 +26,10 @@ exports.getJobsByCompanyId = function(companyId, callback) {
 
 // Method to get job details by job id
 
-exports.getJobDetails = function(companyId, jobId, callback) {
-	console.log("CompanyId__________-" + companyId);
+exports.getJobDetails = function(jobId, callback) {
 	console.log("JobId__________" + jobId);
 
-	db.table('jobs').where('jobId').eq(Number(jobId)).get(function(err, data) {
+	db.table('jobs').where('jobId').eq(jobId).get(function(err, data) {
 		console.log(err, data);
 		callback(err, data);
 	});
