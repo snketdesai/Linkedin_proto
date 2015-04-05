@@ -136,5 +136,40 @@ $(document).ready(function(){
           }
         });
       });
+      
+      $( "#companyProfile" ).click(function() {
+          var name = document.getElementById('name').value;
+          var overviewText = document.getElementById('overviewText').value;
+          var urlText = document.getElementById('urlText').value;
+          console.log(urlText+"  "+overviewText+"   "+name);
+          var profileObj = {
+        	  name : name,
+        	  overviewText : overviewText,
+        	  urlText : urlText
+          };
+
+          $.ajax({
+            type: "POST",
+            url: "/company",
+            contentType: "application/json; charset=UTF-8",
+            dataType: 'json',
+            data: JSON.stringify(profileObj),
+            crossDomain : true,
+            success: function( d ) {
+               var html = '';
+               html += '<div class="form-group" name="up">';
+               html += '<form id = "uploadForm" enctype = "multipart/form-data" action = "/company/logoupload" method = "post">';
+               html += '<label for="companyLogo" name="labLogo">Company Logo</label>';
+               html += '<input type="file" id="companyLogo" name="logo"/>';
+               html += '<input type="text" id="cId" name="cId" hidden/>';
+               html += ' <button id="cLogo" class="btn btn-success pull-right" type="submit" name="submit">Upload Logo</button><ul class="list-inline"><li></li></ul>';
+               html += '</form></div>';
+               
+               $('#cprofile').append(html);
+               $('#cform').hide();
+               $("#cId").val(d.companyId);
+            }
+          });
+       });
 });
         

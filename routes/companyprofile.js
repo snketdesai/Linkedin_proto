@@ -1,7 +1,8 @@
 var dbConn = require('../model/dbConnection');
 var db = dbConn.getDBconnection();
 var uuid = require('node-uuid');
-var multer  = require('multer');
+var fs = require("fs");
+var cprofile = require('./companyprofile');
 
 exports.getView = function(req,res){
 	res.render('sample');
@@ -27,19 +28,18 @@ exports.getCompanyProfile = function(req,res){
 	});
 }
 
-exports.insertCompanyProfile = function(req,res){
+exports.insertCompanyProfile = function(req,res){	
 	var companyId = uuid.v1();
-	var companyName = req.body.companyName;
-	var overview = req.body.overview;
-	var url = req.body.url;
-	var logo = req.body.logo;
+	var companyName = req.body.name;
+	var overview = req.body.overviewText;
+	var url = req.body.urlText;
 	
 	db.table('companyprofile').insert({
 		companyId : companyId,
 		companyName : companyName,
 		overview : overview,
 		url : url,
-		logo : logo,
+		logo : null,
 		numFollowers : 0,
 		status : null
 	},function(err,data) {
@@ -53,7 +53,27 @@ exports.insertCompanyProfile = function(req,res){
     });
 }
 
+exports.insertLogo = function(req,res){
+	fs.readFile(req.files.logo.path, function (err, data) {
+	  fs.writeFile("./uploads/"+req.files.logo.name, data, function (err) {
+		  cprofile.updateCompanyLogo(req, res, "./uploads/"+req.files.logo.name, req.body.cId);
+	  });
+	});
+}
 
+exports.updateCompanyLogo = function(req, res, path, companyId){
+	db.table('companyprofile').where('companyId').eq(companyId).update({
+		logo: path
+	}, function( err, data ) {
+		if(err){
+			console.log( err );
+			res.status(400).json({errmsg:err});
+		}else{
+			console.log( data );
+			res.status(200).json({msg:'update success'});
+		}
+	});
+}
 
 exports.updateCompanyName = function(req,res){
 	var companyId = req.params.companyId;
@@ -67,7 +87,8 @@ exports.updateCompanyName = function(req,res){
 			res.status(400).json({errmsg:err});
 		}else{
 			console.log( data );
-			res.status(200).json({msg:'update success'});
+			//res.status(200).json({msg:'update success'});
+			res.redirect("/");
 		}
 	});
 }
@@ -95,23 +116,6 @@ exports.updateCompanyURL = function(req,res){
 	
 	db.table('companyprofile').where('companyId').eq(companyId).update({
 		url: url
-	}, function( err, data ) {
-		if(err){
-			console.log( err );
-			res.status(400).json({errmsg:err});
-		}else{
-			console.log( data );
-			res.status(200).json({msg:'update success'});
-		}
-	});
-}
-
-exports.updateCompanyLogo = function(req,res){
-	var companyId = req.params.companyId;
-	var logo = req.body.logo;
-	
-	db.table('companyprofile').where('companyId').eq(companyId).update({
-		logo: logo
 	}, function( err, data ) {
 		if(err){
 			console.log( err );

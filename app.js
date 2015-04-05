@@ -13,11 +13,10 @@ var job = require('./routes/jobs');
 var user = require('./routes/users');
 var companyprofile = require('./routes/companyprofile');
 var index = require('./routes/index');
-//var AWS = require('aws-sdk');
 var events = require('events');
 var EventEmitter = events.EventEmitter;
 var bodyParser = require('body-parser');
-
+var fs = require("fs");
 
 var app = express();
 
@@ -31,34 +30,13 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-/*app.use(multer({ dest: './uploads/',
- rename: function (fieldname, filename) {
-    return filename+Date.now();
-  },
-onFileUploadStart: function (file) {
-  console.log(file.originalname + ' is starting ...')
-},
-onFileUploadComplete: function (file) {
-  console.log(file.fieldname + ' uploaded to  ' + file.path)
-  done=true;
-}
-}));*/
+app.use(express.multipart());
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-/*AWS.config.loadFromPath('./public/access.json');
-
-var dd = new AWS.DynamoDB();
-
-var attachDynamo = function(req,res,next){
-
-	req.dynamo = dd;
-	next();
-}
-*/
 app.get('/',index.login);
 
 app.post('/signUp',user.signUp);
@@ -90,6 +68,9 @@ app.get('/registercompanypage', companyprofile.getCompanyRegisterView);
 app.get('/companyprofilepage', companyprofile.getCompanyView);
 
 app.post('/company',companyprofile.insertCompanyProfile);
+
+app.post('/company/logoupload', companyprofile.insertLogo);
+
 app.get('/company/:companyId',companyprofile.getCompanyProfile);
 app.post('/company/:companyId/name',companyprofile.updateCompanyName);
 app.post('/company/:companyId/overview',companyprofile.updateCompanyOverview);
