@@ -10,8 +10,6 @@ var $credentials = {
 		"region": "us-west-1"
 }
 
-
-
 function getAWS_SDK(){
 	AWS.config.loadFromPath('./public/access.json');
 
