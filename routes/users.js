@@ -6,34 +6,48 @@ var user = require('../model/userQueries');
 
 exports.signUp = function(req,res){
 	console.log("Sign up called");
-	var firstName = req.body.firstName;
-	var lastName = req.body.lastName;
+	var firstName;
+	var lastName;
 	var email = req.body.email;
-	var pwd = req.body.pwd;
-	user.signUp(email, pwd, firstName, lastName,'U',function(err,data){
+	var pwd = req.body.password;
+	var userType = req.body.userType;
+	
+	if(userType == 'C'){
+		firstName  = req.body.companyName;
+		lastName = firstName;
+	}
+	else{
+		firstName = req.body.firstName;
+		lastName = req.body.lastName;
+	}
+	user.signUp(email, pwd, firstName, lastName,userType,function(err,data){
 		if(err){
 			  res.writeHead(400);
 			  res.end("Error while inserting data\n");
 		}
 		else{	
-			res.writeHead(200);
-			 res.end("User created successfully.");
+			 res.render("homepage");
 		}
 	});
 }
 
 exports.signIn = function(req,res){
 	console.log("Sign In called");
-	var email = req.body.email;
-	var pwd = req.body.pwd;
+	var email = req.body.username;
+	var pwd = req.body.password;
 	user.signIn(email, pwd,function(err,data){
 		if(err){
 			  res.writeHead(400);
 			  res.end("Error while signing \n");
 		}
 		else{	
+			if(data.lenth != 0){
+				res.render('homepage');
+			}
+			else{
+				res.render('login');
+			}
 			
-			 res.send(data);
 		}
 	});
 }
