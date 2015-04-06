@@ -234,11 +234,22 @@ var Login = function () {
 	            jQuery('.login-form').hide();
 	            jQuery('.register-form').show();
 	        });
+	        
+	        jQuery('#register-company-btn').click(function () {
+	            jQuery('.login-form').hide();
+	            jQuery('.register-company-form').show();
+	        });
 
 	        jQuery('#register-back-btn').click(function () {
 	            jQuery('.login-form').show();
 	            jQuery('.register-form').hide();
 	        });
+	        
+	        jQuery('#register-company-back-btn').click(function () {
+	            jQuery('.login-form').show();
+	            jQuery('.register-company-form').hide();
+	        });
+	        
 	}
     
     return {

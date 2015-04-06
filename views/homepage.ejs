@@ -92,7 +92,7 @@
         <div class="collapse navbar-collapse" id="navbar-collapse2">
           <ul class="nav navbar-nav navbar-right">
            
-           <li><a href="#loginModal" role="button" data-toggle="modal">Logout</a></li>
+           <li><a href="/" role="button" data-toggle="modal">Logout</a></li>
            </ul>
         </div>  
        </div> 
@@ -125,12 +125,11 @@
        <div class="col-md-4 col-sm-6">
         <div class="panel panel-default" id = "panel">
            <div class="panel-heading"><h4>Newsfeed</h4></div>
-          <% for(var i=0; i<profiles.length; i++) {%>
           <div class="panel-body">
             <div class="well well-sm">
             <div class="media">
               <div class="media-body">
-                <h4 class="media-heading"><%= profiles[i] %></h4>
+                <h4 class="media-heading"></h4>
                 <p>
                   <!--Post Body -->
                 </p>
@@ -138,7 +137,6 @@
             </div>
              </div>
           </div>
-          <% } %>
           </div>
          </div> 
       </div>

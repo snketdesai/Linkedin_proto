@@ -38,7 +38,7 @@ exports.signIn = function(userName, password, callback) {
 
 			} else {
 				console.log("no user with this credentials");
-				callback(err, resultlog);
+				callback(err, rows);
 			}
 		});
 
