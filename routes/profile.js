@@ -158,3 +158,9 @@ exports.getUserProfile = function(req,res){
 	
 }
 
+exports.getPortfolio = function(req,res){
+	
+	res.render('portfolio');
+	
+}
+

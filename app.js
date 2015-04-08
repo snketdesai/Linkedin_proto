@@ -58,6 +58,7 @@ app.post('/status/:userid',profile.insertStatus);
 app.post('/company_followed/:userid',profile.insertCompanyFollowed);
 app.post('/user_followed/:userid',profile.insertUserFollowed);
 
+app.get('/portfolio',profile.getPortfolio); //portfolio page
 app.get('/profile/:userid',profile.getProfile); //profile data
 
 app.get('/userprofile',profile.getUserProfile); //profile page
