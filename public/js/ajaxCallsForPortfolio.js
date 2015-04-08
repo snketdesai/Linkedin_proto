@@ -2,7 +2,7 @@
 
 $.ajax({
     type: "GET",
-    url: "/profile/002",
+    url: "/profile/003",
     crossDomain : true,
     contentType: "application/json; charset=UTF-8",
     dataType: 'json',
@@ -12,14 +12,16 @@ $.ajax({
        $("#bio").val(d.Item.bio.S);
        $("#status").val(d.Item.status.S);
              
-       var length_of_user_followed = d.Item.user_followed.SS.length;
+       
+       if(d.Item.user_followed)
+       {var length_of_user_followed = d.Item.user_followed.SS.length;
        
        for(var i=0;i<length_of_user_followed;i++)
     	   {
     	   		var html = '<li class="list-group-item">'+d.Item.user_followed.SS[i]+'</li>';
     	   		$('#listForUser').append($(html));
     	   }
-       
+       }
        var length_of_college = d.Item.college.SS.length;
        
        for(var i=0;i<length_of_college;i++)
@@ -44,6 +46,8 @@ $.ajax({
 	   		$('#listForCertificate').append($(html));
 	   }
        
+       if(d.Item.company_followed)
+    	   {
        var length_of_company = d.Item.company_followed.SS.length;
        
        for(var i=0;i<length_of_company;i++)
@@ -51,7 +55,7 @@ $.ajax({
 	   		var html = '<li class="list-group-item">'+d.Item.company_followed.SS[i]+'</li>';
 	   		$('#listForCompany').append($(html));
 	   }
-       
+    	   }
        //$("#overviewText").val(d.data[0].overview);
        //$("#urlText").val(d.data[0].url);
     }
