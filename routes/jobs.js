@@ -50,11 +50,13 @@ exports.getJobs = function(req, res) {
 
 exports.insertJobDetails = function(req, res) {
 	var companyId = req.params.companyId;
-	var companyName = req.params.companyName;
+	var companyName = req.body.companyName;
 	var jobTitle = req.body.jobTitle;
 	var jobDesc = req.body.jobDesc;
 	var expiryDate = req.body.expiryDate;
 	var location = req.body.location;
+	
+	console.log("Company Name______"+companyName);
 	job.insertJob(companyId,companyName, jobTitle, jobDesc, expiryDate, location, function(
 			err, data) {
 		if (err) {
@@ -78,6 +80,20 @@ exports.deleteJob = function(req, res) {
 			res.writeHead(200);
 			res.end("Record Deleted successfully");
 
+		}
+	});
+}
+
+//Method to search Jobs
+
+exports.searchJobs = function(req,res){
+	var searchTerm = req.params.searchTerm;
+	job.searchJobs(searchTerm,function(err,data){
+		if(err){
+			res.writeHead(400);
+			res.end("Error while searching record\n");
+		}else{
+			res.send(data);
 		}
 	});
 }
