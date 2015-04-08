@@ -8,21 +8,23 @@ exports.getView = function(req,res){
 	res.render('sample');
 }
 
-exports.getCompanyView = function(req,res){
+exports.getCompanyProfileView = function(req,res){
 	res.render('companyprofile');
 }
 
+exports.getCompanyView = function(req,res){
+	res.render('companyhomepage');
+}
+
 exports.getCompanyRegisterView = function(req,res){
-	res.render('registercompanydetails');
+	res.render('companydetailsregistration');
 }
 
 exports.getCompanyProfile = function(req,res){
 	var companyId = req.params.companyId;
-	
 	db.table('companyprofile').having('companyId').eq(companyId).scan(
 	function(err, data) {
 		if(!err){
-			console.log(data);
 			res.status(200).json({data : data});
 		}
 	});
@@ -47,21 +49,23 @@ exports.insertCompanyProfile = function(req,res){
 			console.log("Error: "+err);
 			res.status(400).json({errmsg:err});
 		}else{
-			console.log(data);
+			//console.log(data);
 			res.status(200).json({msg:'insert success', companyId:companyId});
 		}
     });
 }
 
-exports.insertLogo = function(req,res){
+exports.changeCompanyLogo = function(req,res){
+	console.log(req.body.cId);
+	var companyId = req.params.companyId;
 	fs.readFile(req.files.logo.path, function (err, data) {
-	  fs.writeFile("./uploads/"+req.files.logo.name, data, function (err) {
-		  cprofile.updateCompanyLogo(req, res, "./uploads/"+req.files.logo.name, req.body.cId);
+	  fs.writeFile("./public/uploads/"+req.files.logo.name, data, function (err) {
+		  cprofile.updateCompanyLogo(req, res, "./uploads/"+req.files.logo.name, companyId, req.body.cId);
 	  });
 	});
 }
 
-exports.updateCompanyLogo = function(req, res, path, companyId){
+exports.updateCompanyLogo = function(req, res, path, companyId, redirectAction){
 	db.table('companyprofile').where('companyId').eq(companyId).update({
 		logo: path
 	}, function( err, data ) {
@@ -69,8 +73,11 @@ exports.updateCompanyLogo = function(req, res, path, companyId){
 			console.log( err );
 			res.status(400).json({errmsg:err});
 		}else{
-			console.log( data );
-			res.status(200).json({msg:'update success'});
+			if(redirectAction === 'update'){
+				res.redirect('/companyhomepage');
+			}else{
+				res.redirect('/');
+			}
 		}
 	});
 }
@@ -86,7 +93,7 @@ exports.updateCompanyName = function(req,res){
 			console.log( err );
 			res.status(400).json({errmsg:err});
 		}else{
-			console.log( data );
+			//console.log( data );
 			//res.status(200).json({msg:'update success'});
 			res.redirect("/");
 		}

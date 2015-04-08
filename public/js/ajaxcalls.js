@@ -1,16 +1,6 @@
 $("#savename").hide();
 $("#saveoverview").hide();
 $("#saveurl").hide();
-$.ajax({
-    type: "GET",
-    url: "/company/"+$("#companyId").val(),
-    crossDomain : true,
-    success: function( d ) {
-       $("#name").val(d.data[0].companyName);
-       $("#overviewText").val(d.data[0].overview);
-       $("#urlText").val(d.data[0].url);
-    }
-});
 
 $(document).ready(function(){
       
@@ -98,24 +88,32 @@ $(document).ready(function(){
         $("#urlText").prop('disabled', true);
       });
       
-      /*$( "#logo" ).click(function() {
-        var logo = document.getElementById('logoText').value;
-          var logoObj = {
-          logo : logo
-        };
+      $( "#editLogo" ).click(function() {
+          $("#editLogo").hide();
+         
+          var html = '';
+          html += '<form id = "updateLogoForm" enctype = "multipart/form-data" action = "/company/'+document.getElementById("companyId").value+'/logo" method = "post">';
+          html += '<input type="file" id="companyLogo" name="logo"/>';
+          html += '<input type="text" id="cId" name="cId" value="update" hidden/>';
+          html += ' <button id="cLogo" class="btn btn-success pull-right" type="submit" name="submit">Upload Logo</button><ul class="list-inline"><li></li></ul><br>';
+          html += '</form>';
+          
+          $('#up').append(html);
+      });
+    	 
+      $('#updateLogoForm').submit(function() {
+          $(this).ajaxSubmit({
+              error: function(xhr) {
+                      status('Error: ' + xhr.status);
+              },
 
-        $.ajax({
-          type: "POST",
-          url: "/company/"+$("#companyId").val()+"/logo",
-          contentType: "application/json; charset=UTF-8",
-          dataType: 'json',
-          data: JSON.stringify(logoObj),
-          crossDomain : true,
-          success: function( d ) {
-             console.log(d);
-          }
-        });
-      });*/
+              success: function(response) {
+                        console.log(response);
+              }
+          });
+          $("#changeL").hide();
+          return false;
+      });
       
       $( "#postStatus" ).click(function() {
         var status = document.getElementById('statusText').value;
@@ -141,7 +139,6 @@ $(document).ready(function(){
           var name = document.getElementById('name').value;
           var overviewText = document.getElementById('overviewText').value;
           var urlText = document.getElementById('urlText').value;
-          console.log(urlText+"  "+overviewText+"   "+name);
           var profileObj = {
         	  name : name,
         	  overviewText : overviewText,
@@ -158,10 +155,10 @@ $(document).ready(function(){
             success: function( d ) {
                var html = '';
                html += '<div class="form-group" name="up">';
-               html += '<form id = "uploadForm" enctype = "multipart/form-data" action = "/company/logoupload" method = "post">';
+               html += '<form id = "uploadForm" enctype = "multipart/form-data" action = "/company/'+d.companyId+'/logo" method = "post">';
                html += '<label for="companyLogo" name="labLogo">Company Logo</label>';
                html += '<input type="file" id="companyLogo" name="logo"/>';
-               html += '<input type="text" id="cId" name="cId" hidden/>';
+               html += '<input type="text" id="cId" name="cId" value="insert" hidden/>';
                html += ' <button id="cLogo" class="btn btn-success pull-right" type="submit" name="submit">Upload Logo</button><ul class="list-inline"><li></li></ul>';
                html += '</form></div>';
                
@@ -171,5 +168,18 @@ $(document).ready(function(){
             }
           });
        });
+      
+      $('#uploadForm').submit(function() {
+          $(this).ajaxSubmit({
+              error: function(xhr) {
+                      status('Error: ' + xhr.status);
+              },
+
+              success: function(response) {
+                        console.log(response);
+              }
+          });
+          return false;
+      });    
 });
         

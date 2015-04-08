@@ -30,7 +30,7 @@ app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '\public')));
 app.use(express.multipart());
 
 // development only
@@ -74,15 +74,15 @@ app.delete('/company/:companyId/jobs/:jobId',job.deleteJob);
 
 app.get('/sample', companyprofile.getView);
 app.get('/registercompanypage', companyprofile.getCompanyRegisterView);
-app.get('/companyprofilepage', companyprofile.getCompanyView);
+app.get('/companyhomepage', companyprofile.getCompanyView);
+app.get('/companyprofilepage', companyprofile.getCompanyProfileView);
 
 app.post('/company',companyprofile.insertCompanyProfile);
-app.post('/company/logoupload', companyprofile.insertLogo);
 app.get('/company/:companyId',companyprofile.getCompanyProfile);
 app.post('/company/:companyId/name',companyprofile.updateCompanyName);
 app.post('/company/:companyId/overview',companyprofile.updateCompanyOverview);
 app.post('/company/:companyId/url',companyprofile.updateCompanyURL);
-app.post('/company/:companyId/logo',companyprofile.updateCompanyLogo);
+app.post('/company/:companyId/logo',companyprofile.changeCompanyLogo);
 app.post('/company/:companyId/followers',companyprofile.addCompanyFollower);
 app.post('/company/:companyId/status',companyprofile.updateCompanyStatus);
 
