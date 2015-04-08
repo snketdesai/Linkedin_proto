@@ -43,13 +43,50 @@ $.ajax({
 	   		var html = '<li class="list-group-item">'+d.Item.certification.SS[i]+'</li>';
 	   		$('#listForCertificate').append($(html));
 	   }
-       $("#college").val(d.Item.college.SS[0]);
        
-       $("#skill").val(d.Item.skill.SS[0]);
+       var length_of_company = d.Item.company_followed.SS.length;
        
-       $("#certification").val(d.Item.certification.SS[0]);
+       for(var i=0;i<length_of_company;i++)
+	   {
+	   		var html = '<li class="list-group-item">'+d.Item.company_followed.SS[i]+'</li>';
+	   		$('#listForCompany').append($(html));
+	   }
+       
        //$("#overviewText").val(d.data[0].overview);
        //$("#urlText").val(d.data[0].url);
     }
 });
 
+$(document).ready(function(){
+	$('button.followButton').live('click', function(e){
+    e.preventDefault();
+    $button = $(this);
+    if($button.hasClass('following')){
+        
+        //$.ajax(); Do Unfollow
+    	$button.css('color','black');
+        $button.removeClass('following');
+        $button.removeClass('unfollow');
+        $button.text('Follow');
+    } else {
+        
+        // $.ajax(); Do Follow
+        $button.css('color','green');
+        $button.addClass('following');
+        $button.text('Following');
+    }
+});
+
+$('button.followButton').hover(function(){
+     $button = $(this);
+    if($button.hasClass('following')){
+        $button.addClass('unfollow');
+        $button.text('Unfollow');
+    }
+}, function(){
+    if($button.hasClass('following')){
+        $button.removeClass('unfollow');
+        $button.text('Following');
+    }
+});
+})
