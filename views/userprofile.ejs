@@ -42,7 +42,7 @@
       <div class="well">
           <h4>About Me!</h4>
           <form>
-                <input id="userid" type="text" class="form-control" placeholder="Company Id" value="002" disabled>
+                <input id="userid" type="text" class="form-control" placeholder="Company Id" value="003" disabled>
                 <div class="form-group">
                   <label for="companyName">User Name</label>
                 <!--  <input id="name" type="text" class="form-control" disabled><button id="savename" class="btn btn-link pull-right" type="button">save</button><button id="editname" class="btn btn-link pull-right" type="button">edit</button>-->
@@ -71,11 +71,17 @@
               <form>
                   <div class="form-group">
                     <label for="college">College</label>
-                    <input id="college" type="text" class="form-control" placeholder="Enter College" disabled> <button id="saveCollege" class="btn btn-link pull-right" type="button">save</button><button id="addCollege" class="btn btn-link pull-right" type="button">Add College</button>
+                    <input id="college" type="text" class="form-control" placeholder="Enter College" disabled> <!--<ul id="listForCollege" class="list-group">
+                        
+
+                     </ul>--><button id="saveCollege" class="btn btn-link pull-right" type="button">save</button><button id="addCollege" class="btn btn-link pull-right" type="button">Add College</button>
                   </div>
                   <div class="form-group">
                     <label for="skills">Skills</label>
-                    <textarea id="skill" class="form-control" placeholder="Skills" disabled></textarea><button id="saveSkill" class="btn btn-link pull-right" type="button">save</button><button id="addSkill" class="btn btn-link pull-right" type="button">Add Skills</button>
+                   <textarea id="skill" class="form-control" placeholder="Skills" disabled></textarea><!-- <ul id="listForSkill" class="list-group">
+                        
+                        
+                     </ul>--><button id="saveSkill" class="btn btn-link pull-right" type="button">save</button><button id="addSkill" class="btn btn-link pull-right" type="button">Add Skills</button>
                   </div>
                  <!-- <div class="form-group">
                     <label for="expiry">Expiry Date</label><br>
@@ -83,7 +89,10 @@
                   </div>-->
                   <div class="form-group">
                     <label for="certification">Certification</label>
-                    <input id="certification" type="text" class="form-control" placeholder="Certification" disabled></textarea> <button id="saveCertification" class="btn btn-link pull-right" type="button">save</button><button id="addCertification" class="btn btn-link pull-right" type="button">Add Certificates</button>
+                    <input id="certification" type="text" class="form-control" placeholder="Certification" disabled></textarea><!--<ul id="listForCertificate" class="list-group">
+                        
+                        
+                     </ul> --><button id="saveCertification" class="btn btn-link pull-right" type="button">save</button><button id="addCertification" class="btn btn-link pull-right" type="button">Add Certificates</button>
                   </div>
                   <!--<button class="btn btn-success pull-right" type="button">Post Job</button><ul class="list-inline"><li></li></ul>-->
               </form>
@@ -112,10 +121,9 @@
         <div class="panel panel-default " >
            <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Following Users</h4></div>
           <div class="panel-body">
-            <ul class="list-group">
-            <li id="user1" class="list-group-item"></li>
-            <li id="user2" class="list-group-item"></li>
-            <li id="user3" class="list-group-item"></li>
+            <ul id="listForUser" class="list-group">
+              
+
             </ul>
           </div>
          </div>
@@ -126,10 +134,8 @@
         <div class="panel panel-default " >
            <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Following Companies</h4></div>
           <div class="panel-body">
-            <ul class="list-group">
-            <li class="list-group-item">Modals</li>
-            <li class="list-group-item">Sliders / Carousel</li>
-            <li class="list-group-item">Thumbnails</li>
+            <ul id="listForCompany" class="list-group">
+            
             </ul>
           </div>
          </div>

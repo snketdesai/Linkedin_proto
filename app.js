@@ -58,6 +58,7 @@ app.post('/status/:userid',profile.insertStatus);
 app.post('/company_followed/:userid',profile.insertCompanyFollowed);
 app.post('/user_followed/:userid',profile.insertUserFollowed);
 
+app.get('/portfolio',profile.getPortfolio); //portfolio page
 app.get('/profile/:userid',profile.getProfile); //profile data
 
 app.get('/userprofile',profile.getUserProfile); //profile page
@@ -68,6 +69,7 @@ app.get('/showJobs',job.showJobsView);
 
 app.get('/jobs',job.getJobs);
 app.get('/jobs/:jobId',job.getJobDetails);
+app.get('/searchJobs/:searchTerm',job.searchJobs);
 app.get('/company/:companyId/jobs',job.getJobsByCompany);
 app.post('/company/:companyId/jobs/',job.insertJobDetails);
 app.delete('/company/:companyId/jobs/:jobId',job.deleteJob);
