@@ -72,7 +72,7 @@ app.get('/company/:companyId/jobs',job.getJobsByCompany);
 app.post('/company/:companyId/jobs/',job.insertJobDetails);
 app.delete('/company/:companyId/jobs/:jobId',job.deleteJob);
 
-app.get('/sample', companyprofile.getView);
+app.get('/search', companyprofile.getSearchView);
 app.get('/registercompanypage', companyprofile.getCompanyRegisterView);
 app.get('/companyhomepage', companyprofile.getCompanyView);
 app.get('/companyprofilepage', companyprofile.getCompanyProfileView);

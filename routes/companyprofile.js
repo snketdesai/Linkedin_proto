@@ -4,8 +4,8 @@ var uuid = require('node-uuid');
 var fs = require("fs");
 var cprofile = require('./companyprofile');
 
-exports.getView = function(req,res){
-	res.render('sample');
+exports.getSearchView = function(req,res){
+	res.render('search');
 }
 
 exports.getCompanyProfileView = function(req,res){

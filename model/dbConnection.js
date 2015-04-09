@@ -5,8 +5,8 @@ var dynomoDb;
 var pool;
 
 var $credentials = {
-		"accessKeyId": "", 
-		"secretAccessKey": "", 
+		"accessKeyId": "AKIAJO4JY6EENEAGOB3A", 
+		"secretAccessKey": "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", 
 		"region": "us-west-1"
 }
 
