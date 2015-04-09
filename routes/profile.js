@@ -160,7 +160,19 @@ exports.getUserProfile = function(req,res){
 
 exports.getPortfolio = function(req,res){
 	
-	res.render('portfolio');
+	console.log(storeId.id);
+	res.render('portfolio',{id : storeId.id});
 	
-}
+},
 
+exports.storeProfileId = storeId;
+
+var storeId = {
+		id : "003"
+}
+/*function storeId()
+{
+	id = "003"
+		
+}
+*/
