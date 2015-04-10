@@ -201,7 +201,7 @@
 		<form class="form-vertical register-company-form" action="/signUp"
 			method="post">
 			<h3>Sign Up</h3>
-
+				<div id="companyMsgInfo"></div>
 			<div class="control-group">
 				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
 				<label class="control-label visible-ie8 visible-ie9">Email</label>
@@ -209,7 +209,7 @@
 					<div class="input-icon left">
 						<i class="icon-envelope"></i> <input
 							class="m-wrap placeholder-no-fix" type="text" placeholder="Email"
-							name="email" />
+							name="companyEmail"  id="companyEmail"/>
 					</div>
 				</div>
 			</div>
@@ -221,7 +221,7 @@
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-user"></i> <input class="m-wrap placeholder-no-fix"
-							type="text" autocomplete="off" placeholder="Company Name"
+							type="text" autocomplete="off" placeholder="Company Name" id="companyName"
 							name="companyName" /> <input type="hidden" name="userType"
 							value="C" />
 					</div>
@@ -338,6 +338,28 @@
 							 $("#msginfo").empty();
 			                  $("#msginfo").removeClass("alert alert-danger"); 
 			                  $("#firstName").focus();
+						}
+					}, "json");
+		         
+			});
+			
+			$("#companyEmail").blur(function() {
+				console.log("Inside validate company");
+				var userName = $(this).val();
+				var ajax_url = "/checkForExistingUser";
+				
+				$.post(ajax_url, { email: userName}, function( data ) {
+					console.log("Is user already present_______"+data);
+						if(data){
+							 $("#companyMsgInfo").addClass("alert alert-danger"); 
+			                  $("#companyMsgInfo").text("Username already exist. Please try again."); 
+			                  $("#companyEmail").focus();
+			                  return false;
+						}
+						else{
+							 $("#companyMsgInfo").empty();
+			                  $("#companyMsgInfo").removeClass("alert alert-danger"); 
+			                  $("#companyName").focus();
 						}
 					}, "json");
 		         
