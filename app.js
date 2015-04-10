@@ -5,7 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
-
+var session = require('express-session');
 var http = require('http');
 var path = require('path');
 var profile = require('./routes/profile');
@@ -27,6 +27,7 @@ app.set('views',__dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.favicon());
 app.use(express.logger('dev'));
+app.use(session({secret:'secre session',resave:true,saveUninitialized:true}));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
