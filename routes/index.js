@@ -8,5 +8,6 @@ exports.login = function(req, res){
 };
 
 exports.search = function(req, res){
+	console.log("Search "+req.session.userId);
 	res.render('search');
 };

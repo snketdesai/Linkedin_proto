@@ -153,8 +153,8 @@ exports.getProfile = function(req,res){
 }
 
 exports.getUserProfile = function(req,res){
-	
-	res.render('userprofile');
+	//console.log("profile"+req.session.userId);
+	res.render('userprofile',{user:req.session.userId});
 	
 }
 

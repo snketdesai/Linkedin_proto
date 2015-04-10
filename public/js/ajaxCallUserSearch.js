@@ -39,7 +39,7 @@ $(document).ready(function(){
 		    	html += '<div class="media">';
 		    	html += '<div class="media-body">';
 		    	html += '<h4 class="media-heading"><a >'+d[i].firstname+' '+d[i].lastname+'</a></h4>';
-		    	html += '<p> <a href="#" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-comment"></span> Go To Profile</a> </p>';
+		    	html += '<p> <button id="profile" value='+d[i].user_Id+' class="btn btn-xs btn-default"><!--<span class="glyphicon glyphicon-comment"></span>--> Go To Profile </button> </p>';
 		    	html += '</div>';
 		    	html += '</div>';
 		    	html += '</div>';
@@ -58,5 +58,15 @@ $(document).ready(function(){
 	return false;
 
     });
+		$('body').on("click","#profile",function(){
+			
+		//	alert("hi");
+			var userid = $(this).attr("value");
+			sessionStorage.userid = userid;
+			window.location='/portfolio';
+			//alert(userid);
+			
+		});
+	
     });
 
