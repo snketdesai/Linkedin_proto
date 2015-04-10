@@ -6,3 +6,7 @@
 exports.login = function(req, res){
   res.render('login');
 };
+
+exports.search = function(req, res){
+	res.render('search');
+};

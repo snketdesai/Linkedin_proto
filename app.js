@@ -43,12 +43,13 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/',index.login);
+app.get('/search', index.search);
 
 app.post('/signUp',user.signUp);
 app.post('/signIn',user.signIn);
 app.get('/getUserFromSession',user.getUserFromSession);
 app.post('/checkForExistingUser',user.IsUserPresent);
-app.get('/usersearch/:firstName/:lastName', user.searchUsers);
+app.get('/searchuser/:str', user.searchUsers);
 
 app.post('/application', jobapp.postJobApplication);
 app.get('/userapplication/:userId', jobapp.getJobApplication);

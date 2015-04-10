@@ -63,17 +63,25 @@ exports.signIn = function(req,res){
 
 exports.searchUsers = function(req,res){
 	console.log("searching for the user");
-	var firstName = req.params.firstName;
-	var lastName = req.params.lastName;
-	user.searchUser(firstName, lastName, function(err,data){
+	var str = req.params.str;
+	var name = str.split(" ");
+	var firstName = name[0];
+	var lastName = name[1];
+	user.searchUsers(firstName, lastName, function(err,data){
 		if(err){
 			res.writeHead(400);
-			res.end("Error while signing");
+			res.end("Error while searching");
 		}else{
-			res.send(data);
+			console.log("success::"+data);
+			//console.log("undefined: " + res.body);
+			res.writeHead(200);
+			
+			res.end(JSON.stringify(data));
+			//console.log(JSON.stringify(res.body));
+			//res.end(JSON.stringify(data));
 		}
 	});
-}
+};
 
 exports.IsUserPresent = function(req,res){
 	console.log("___________IsUserPresent called_____________");
