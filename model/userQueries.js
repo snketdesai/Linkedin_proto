@@ -28,7 +28,7 @@ exports.signUp = function(email, password, firstName, lastName,userType, callbac
 exports.signIn = function(userName, password, callback) {
 
 	console.log("USERNAME: " + userName + " Password: " + password);
-	var sql = 'SELECT firstname,lastname,user_Id FROM users where email = ? and password = ?';
+	var sql = 'SELECT firstname,lastname,user_Id,user_type FROM users where email = ? and password = ?';
 	console.log(sql);
 	pool.getConnection(function(err, connection) {
 		connection.query(sql, [ userName, password ], function(err, rows) {
@@ -48,18 +48,19 @@ exports.signIn = function(userName, password, callback) {
 
 exports.searchUsers = function(firstName, lastName, callback) {
 
-	console.log(" userId: " + userId);
-	var sql = 'SELECT firstname, lastname FROM users where firstname = ? and lastname = ?';
-	console.log(sql);
+	console.log(" Name: " + firstName +" " + lastName);
+	var sql = 'SELECT firstname, lastname, user_Id FROM users WHERE (firstname LIKE CONCAT("%","' + firstName + '","%") AND lastname LIKE CONCAT("%","'+ lastName +'","%")) OR (firstname LIKE CONCAT("%","' + firstName + '","%")) OR (lastname LIKE CONCAT("%","' + lastName + '","%")) ';
+	console.log("QUERY: " + sql);
 	pool.getConnection(function(err, connection) {
 		connection.query(sql, [ firstName, lastName ], function(err, rows) {
 			console.log(rows);
-			if (rows.length !== 0) {
-				callback(err, rows);
-
-			} else {
+			if(err){
 				console.log("no users exist with these search parameters");
 				callback(err, rows);
+			}
+			else {
+				callback(err, rows);
+
 			}
 		});
 

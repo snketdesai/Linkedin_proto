@@ -21,6 +21,10 @@ var fs = require("fs");
 
 var app = express();
 
+app.use(express.cookieParser());
+app.use(express.session({secret: '1234567890QWERTY'}));
+
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views',__dirname + '/views');
@@ -40,11 +44,13 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/',index.login);
+app.get('/search', index.search);
 
 app.post('/signUp',user.signUp);
 app.post('/signIn',user.signIn);
+app.get('/getUserFromSession',user.getUserFromSession);
 app.post('/checkForExistingUser',user.IsUserPresent);
-app.get('/usersearch/:firstName/:lastName', user.searchUsers);
+app.get('/searchuser/:str', user.searchUsers);
 
 app.post('/application', jobapp.postJobApplication);
 app.get('/userapplication/:userId', jobapp.getJobApplication);
