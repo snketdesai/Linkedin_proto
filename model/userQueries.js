@@ -49,7 +49,7 @@ exports.signIn = function(userName, password, callback) {
 exports.searchUsers = function(firstName, lastName, callback) {
 
 	console.log(" Name: " + firstName +" " + lastName);
-	var sql = 'SELECT firstname, lastname, user_Id FROM users WHERE (firstname LIKE CONCAT("%","' + firstName + '","%") AND lastname LIKE CONCAT("%","'+ lastName +'","%")) OR (firstname LIKE CONCAT("%","' + firstName + '","%")) OR (lastname LIKE CONCAT("%","' + lastName + '","%")) ';
+	var sql = 'SELECT firstname, lastname, user_Id FROM users WHERE (firstname LIKE CONCAT("%","' + firstName + '","%") AND lastname LIKE CONCAT("%","'+ lastName +'","%")) OR (firstname LIKE CONCAT("%","' + firstName + '","%")) OR (lastname LIKE CONCAT("%","' + firstName + '","%")) ';
 	console.log("QUERY: " + sql);
 	pool.getConnection(function(err, connection) {
 		connection.query(sql, [ firstName, lastName ], function(err, rows) {
