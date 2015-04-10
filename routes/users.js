@@ -26,6 +26,7 @@ exports.signUp = function(req,res){
 			  res.end("Error while inserting data\n");
 		}
 		else{	
+			console.log(data);
 			 res.render("homepage");
 		}
 	});
@@ -41,8 +42,16 @@ exports.signIn = function(req,res){
 			  res.end("Error while signing \n");
 		}
 		else{	
-			if(data.lenth != 0){
-				res.render('homepage');
+			if(data.length != 0){
+				console.log("User Signed in_______"+data[0].user_type);
+				req.session.userId = data[0].user_Id;
+				if(data[0].user_type === "U"){
+					console.log("USer has signed in");
+					res.render('homepage'); // render Newsfeed page for user			
+				}
+				else if(data.user_type == "C"){
+					// render to company Profile page
+				}
 			}
 			else{
 				res.render('login');
@@ -78,4 +87,10 @@ exports.IsUserPresent = function(req,res){
 			 res.send(data);
 		}
 	});
+}
+
+exports.getUserFromSession = function(req,res){
+	console.log("getUserFromSession_________"+req.session.userId);
+	var userId = req.session.userId;
+	res.send(userId.toString());
 }

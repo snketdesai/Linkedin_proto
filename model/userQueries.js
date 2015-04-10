@@ -28,7 +28,7 @@ exports.signUp = function(email, password, firstName, lastName,userType, callbac
 exports.signIn = function(userName, password, callback) {
 
 	console.log("USERNAME: " + userName + " Password: " + password);
-	var sql = 'SELECT firstname,lastname,user_Id FROM users where email = ? and password = ?';
+	var sql = 'SELECT firstname,lastname,user_Id,user_type FROM users where email = ? and password = ?';
 	console.log(sql);
 	pool.getConnection(function(err, connection) {
 		connection.query(sql, [ userName, password ], function(err, rows) {

@@ -21,6 +21,10 @@ var fs = require("fs");
 
 var app = express();
 
+app.use(express.cookieParser());
+app.use(express.session({secret: '1234567890QWERTY'}));
+
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views',__dirname + '/views');
@@ -42,6 +46,7 @@ app.get('/',index.login);
 
 app.post('/signUp',user.signUp);
 app.post('/signIn',user.signIn);
+app.get('/getUserFromSession',user.getUserFromSession);
 app.post('/checkForExistingUser',user.IsUserPresent);
 app.get('/usersearch/:firstName/:lastName', user.searchUsers);
 
