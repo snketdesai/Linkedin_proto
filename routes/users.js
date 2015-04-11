@@ -47,7 +47,8 @@ exports.signIn = function(req,res){
 				req.session.userId = data[0].user_Id;
 				if(data[0].user_type === "U"){
 					console.log("USer has signed in");
-					res.render('homepage'); // render Newsfeed page for user			
+					
+					res.render('homepage',{user:req.session.userId}); // render Newsfeed page for user			
 				}
 				else if(data.user_type == "C"){
 					// render to company Profile page
@@ -102,3 +103,29 @@ exports.getUserFromSession = function(req,res){
 	var userId = req.session.userId;
 	res.send(userId.toString());
 }
+
+
+exports.getName = function(req,res){
+
+	console.log("Getting name of user....");
+
+	var userId = req.params.userId;
+
+	user.getName(userId, function(err,data){
+
+	if(err){
+
+		res.writeHead(400);
+
+		res.end("Error while getting user name.");
+
+	}
+	else{
+
+	res.send(data);
+
+	}
+
+	});
+
+	}

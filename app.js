@@ -55,7 +55,7 @@ app.get('/searchuser/:str', user.searchUsers);
 app.post('/application', jobapp.postJobApplication);
 app.get('/userapplication/:userId', jobapp.getJobApplication);
 app.post('/updatejobstatus/:jobId/:userId', jobapp.updateJobStatus);
-
+app.get('/getName/:userId', user.getName);
 
 app.post('/bio/:userid',profile.insertBio);
 app.post('/certification/:userid',profile.insertCertification);

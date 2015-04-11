@@ -219,7 +219,7 @@ exports.getProfileInfo = function(userid,callback){
 		        }
 		},
 		"AttributesToGet":[
-			"bio","certification","skill","college","status","company_followed","user_followed"
+			"bio","certification","skill","college","status","company_followed","user_followed","post"
 		],
 		"TableName":"user_profile"	
 		},
