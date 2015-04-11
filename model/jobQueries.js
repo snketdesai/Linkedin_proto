@@ -13,16 +13,38 @@ var db = dbConn.getDBconnection();
 
 exports.getAllJobs = function(callback) {
 	db.table('jobs').scan(function(err, data) {
-		callback(err, data);
-	})
-},
+		var jobs = [];
+		var j = 0;
+		for(var i=0;i<data.length;i++){
+			console.log(data[i].expiryDate);
+			var exDate = new Date(data[i].expiryDate);
+			var todayDate = new Date();
+			if(todayDate <= exDate){
+				jobs[j] = data[i];
+				j++;
+			}
+		}	
+		callback(err, jobs);
+	});
+}
 
 // Method to get job by company Id
 
 exports.getJobsByCompanyId = function(companyId, callback) {
 	db.table('jobs').having('companyId').eq(companyId).scan(
 			function(err, data) {
-				callback(err, data);
+				var jobs = [];
+				var j = 0;
+				for(var i=0;i<data.length;i++){
+					console.log(data[i].expiryDate);
+					var exDate = new Date(data[i].expiryDate);
+					var todayDate = new Date();
+					if(todayDate <= exDate){
+						jobs[j] = data[i];
+						j++;
+					}
+				}	
+				callback(err, jobs);
 			});
 }
 
@@ -96,8 +118,12 @@ exports.searchJobs = function(searchTerm,callback){
 	        		for(j=0;j<member.length;j++){
 		            	console.log("Job ID_____"+member[j]);
 		            	var obj = JSON.parse(member[j]);
-		            	jobs[i] = obj;
-		            	i++;
+		            	var exDate = new Date(obj.expiryDate);
+						var todayDate = new Date();
+						if(todayDate <= exDate){
+							jobs[i] = obj;
+							i++;
+						}		
 		            }
 		            if(pos == all_keys.length - 1){
 		            	 console.log(jobs);
