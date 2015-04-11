@@ -27,7 +27,7 @@ exports.signUp = function(req,res){
 		}
 		else{	
 			console.log(data);
-			 res.render("homepage");
+			res.render("homepage");
 		}
 	});
 }
@@ -51,6 +51,7 @@ exports.signIn = function(req,res){
 					res.render('homepage',{user:req.session.userId}); // render Newsfeed page for user			
 				}
 				else if(data.user_type == "C"){
+					req.session.companyId = data[0].user_Id;
 					res.render('companyhomepage');
 				}
 			}

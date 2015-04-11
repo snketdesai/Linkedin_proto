@@ -25,11 +25,13 @@ exports.getCompanyProfileViewName = function(req,res){
 }
 
 exports.getCompanyView = function(req,res){
-	res.render('companyhomepage');
+	console.log(req.session.companyId);
+	res.render('companyhomepage', {companyId:req.session.companyId});
 }
 
 exports.getCompanyRegisterView = function(req,res){
-	res.render('companydetailsregistration');
+	console.log(req.session.companyId);
+	res.render('companydetailsregistration', {companyId:req.session.companyId});
 }
 
 exports.getCompanyProfile = function(req,res){
