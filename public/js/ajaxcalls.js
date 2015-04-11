@@ -136,10 +136,12 @@ $(document).ready(function(){
       });
       
       $( "#companyProfile" ).click(function() {
+    	  var id = document.getElementById('companyId').value;
           var name = document.getElementById('name').value;
           var overviewText = document.getElementById('overviewText').value;
           var urlText = document.getElementById('urlText').value;
           var profileObj = {
+        	  id : id,
         	  name : name,
         	  overviewText : overviewText,
         	  urlText : urlText

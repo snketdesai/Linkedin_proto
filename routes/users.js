@@ -11,6 +11,7 @@ exports.signUp = function(req,res){
 	var email = req.body.email;
 	var pwd = req.body.password;
 	var userType = req.body.userType;
+	console.log(email+"   "+userType);
 	
 	if(userType == 'C'){
 		firstName  = req.body.companyName;
@@ -27,9 +28,9 @@ exports.signUp = function(req,res){
 		}
 		else{	
 			console.log(data);
-<<<<<<< HEAD
+
 			res.render("homepage");
-=======
+
 			req.session.userId = data.insertId;
 			if(userType === "U"){
 				 res.render("homepage",{user:req.session.userId});
@@ -37,7 +38,7 @@ exports.signUp = function(req,res){
 			else if(userType === "C"){
 				res.render('companyhomepage');
 			}
->>>>>>> 272554466e01ee9d247407aaef9156eb86720b8f
+
 		}
 	});
 }

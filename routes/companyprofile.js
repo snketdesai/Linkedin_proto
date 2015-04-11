@@ -45,7 +45,7 @@ exports.getCompanyProfile = function(req,res){
 }
 
 exports.insertCompanyProfile = function(req,res){	
-	var companyId = uuid.v1();
+	var companyId = req.session.companyId;
 	var companyName = req.body.name;
 	var overview = req.body.overviewText;
 	var url = req.body.urlText;
