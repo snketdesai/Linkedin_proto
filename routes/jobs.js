@@ -49,7 +49,7 @@ exports.getJobs = function(req, res) {
 }
 
 exports.insertJobDetails = function(req, res) {
-	var companyId = req.params.companyId;
+	var companyId = req.body.companyId;
 	var companyName = req.body.companyName;
 	var jobTitle = req.body.jobTitle;
 	var jobDesc = req.body.jobDesc;

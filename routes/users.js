@@ -50,7 +50,7 @@ exports.signIn = function(req,res){
 					res.render('homepage'); // render Newsfeed page for user			
 				}
 				else if(data.user_type == "C"){
-					// render to company Profile page
+					res.render('companyhomepage');
 				}
 			}
 			else{

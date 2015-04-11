@@ -28,7 +28,7 @@
     <div class="col-md-12">
         <div class="navbar-header">
           <a href="#" style="margin-left:15px;" class="navbar-btn btn btn-default btn-plus dropdown-toggle" data-toggle="dropdown"></i> Home <small></small></a>
-          <a href="#" style="margin-left:5px;" class="navbar-btn btn btn-default btn-plus dropdown-toggle" data-toggle="dropdown"></i> Job Applications <small></small></a>
+          <a href="/company/logout" style="margin-left:5px;" class="navbar-btn btn btn-default btn-plus dropdown-toggle" data-toggle="dropdown"></i> Logout <small></small></a>
         </div>
     </div>	
 </div>
@@ -46,13 +46,7 @@
           		<div id="up" class="form-group" name="up" id="changeL">	
           		</div>
           		<button id="editLogo" class="btn btn-link pull-right" type="button">change logo</button>
-          		<!-- <form id="data" enctype = "multipart/form-data" action = "/company/logoupload" method = "post">
-	          		<div class="form-group" name="up" id="changeL">
-	          			<input type="file" id="companyLogo" name="logo"/>
-	          		</div>
-          			<button id="saveLogo" class="btn btn-link pull-right" type="submit">save logo</button>
-          		</form> -->
-                <input id="companyId" type="text" class="form-control" placeholder="Company Id" value="10d4a9d0-dd8c-11e4-9d77-0177e34acfb0" disabled>
+                <input id="companyId" type="text" class="form-control" placeholder="Company Id" value="1292e6b0-e020-11e4-857d-2f2a3c84016c" disabled>
                 <div class="form-group">
                   <label for="companyName">Company Name</label>
                   <input id="name" type="text" class="form-control" disabled><button id="savename" class="btn btn-link pull-right" type="button">save</button><button id="editname" class="btn btn-link pull-right" type="button">edit</button>
@@ -86,13 +80,13 @@
                   </div>
                   <div class="form-group">
                     <label for="expiry">Expiry Date</label><br>
-                    <input type="date" class="form-control" name="expiry">
+                    <input type="date" class="form-control" name="expiry" id="expiry">
                   </div>
                   <div class="form-group">
                     <label for="location">Job Location</label>
                     <input type="text" class="form-control" id="location" placeholder="Location"></textarea>
                   </div>
-                  <button class="btn btn-success pull-right" type="button">Post Job</button><ul class="list-inline"><li></li></ul>
+                  <button id="postJob" class="btn btn-success pull-right" type="button">Post Job</button><ul class="list-inline"><li></li></ul>
               </form>
           </div>
       
@@ -129,15 +123,23 @@
 	<script src="js/scripts.js"></script>
   	<script src="js/ajaxcalls.js"></script>
   	<script type="text/javascript">
+  		var cId = $("#companyId").val();
+  		if(cId === ''){
+  			cId = 'junk';
+  		}
   		$.ajax({
 		    type: "GET",
-		    url: "/company/"+$("#companyId").val(),
+		    url: "/company/"+cId,
 		    crossDomain : true,
 		    success: function( d ) {
-		       $("#name").val(d.data[0].companyName);
-		       $("#overviewText").val(d.data[0].overview);
-		       $("#urlText").val(d.data[0].url);
-		       $("#cLogo").attr("src", d.data[0].logo);
+		       if(typeof d.data[0] === 'undefined'){
+		       		window.location='/companyregistrationpage';
+		       }else{
+	       			$("#name").val(d.data[0].companyName);
+	       			$("#overviewText").val(d.data[0].overview);
+	       			$("#urlText").val(d.data[0].url);
+	       			$("#cLogo").attr("src", d.data[0].logo);	
+		       }
 		    }
 		});
   	</script>

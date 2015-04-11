@@ -81,10 +81,11 @@ app.get('/company/:companyId/jobs',job.getJobsByCompany);
 app.post('/company/:companyId/jobs/',job.insertJobDetails);
 app.delete('/company/:companyId/jobs/:jobId',job.deleteJob);
 
-app.get('/search', companyprofile.getSearchView);
-app.get('/registercompanypage', companyprofile.getCompanyRegisterView);
+app.get('/searchpage', companyprofile.getSearchView);
+app.get('/companyregistrationpage', companyprofile.getCompanyRegisterView);
 app.get('/companyhomepage', companyprofile.getCompanyView);
-app.get('/companyprofilepage', companyprofile.getCompanyProfileView);
+app.get('/companyprofilepagename/:companyName', companyprofile.getCompanyProfileViewName);
+app.get('/company/logout', companyprofile.logout);
 
 app.post('/company',companyprofile.insertCompanyProfile);
 app.get('/company/:companyId',companyprofile.getCompanyProfile);
@@ -94,6 +95,8 @@ app.post('/company/:companyId/url',companyprofile.updateCompanyURL);
 app.post('/company/:companyId/logo',companyprofile.changeCompanyLogo);
 app.post('/company/:companyId/followers',companyprofile.addCompanyFollower);
 app.post('/company/:companyId/status',companyprofile.updateCompanyStatus);
+app.post('/company/autocompletelist',companyprofile.autoCompleteCompanySearch);
+app.post('/company/companylist',companyprofile.companySearch);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

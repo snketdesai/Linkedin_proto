@@ -5,17 +5,9 @@ var dynomoDb;
 var pool;
 
 var $credentials = {
-<<<<<<< HEAD
 		"accessKeyId": "", 
 		"secretAccessKey": "", 
 		"region": "us-west-1"
-=======
-
-		"accessKeyId": "", 
-		"secretAccessKey": "", 
-		"region": ""
-
->>>>>>> origin/master
 }
 
 function getAWS_SDK(){
@@ -25,9 +17,6 @@ function getAWS_SDK(){
 	
 	return aws;
 }
-
-
-
 
 function getDBconnection(){
 	if(dynomoDb){

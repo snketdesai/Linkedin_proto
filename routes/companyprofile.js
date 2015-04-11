@@ -3,13 +3,25 @@ var db = dbConn.getDBconnection();
 var uuid = require('node-uuid');
 var fs = require("fs");
 var cprofile = require('./companyprofile');
+var redis = require("redis");
+var client = redis.createClient(6379,"127.0.0.1");
 
 exports.getSearchView = function(req,res){
 	res.render('search');
 }
 
-exports.getCompanyProfileView = function(req,res){
-	res.render('companyprofile');
+exports.getCompanyProfileViewName = function(req,res){
+	var query = req.params.companyName;
+	client.get(query, function(err, companyId) {
+		db.table('companyprofile').having('companyId').eq(companyId).scan(
+		function(err, data) {
+			if(!err){
+				res.render('companyprofile', {data:data});
+			}else{
+				console.log(err);
+			}
+		});
+	}); 
 }
 
 exports.getCompanyView = function(req,res){
@@ -49,7 +61,7 @@ exports.insertCompanyProfile = function(req,res){
 			console.log("Error: "+err);
 			res.status(400).json({errmsg:err});
 		}else{
-			//console.log(data);
+			client.set(companyName, companyId);
 			res.status(200).json({msg:'insert success', companyId:companyId});
 		}
     });
@@ -165,4 +177,52 @@ exports.updateCompanyStatus = function(req,res){
 			res.status(200).json({msg:'update success'});
 		}
 	});
+}
+
+exports.autoCompleteCompanySearch = function(req,res){
+	var query = req.body.query+"*";
+	client.keys(query, function(err, reply) {
+	    res.send(reply);
+	});
+}
+
+exports.companySearch = function(req,res){
+	var query = req.body.name+"*";
+	
+	client.keys(query, function(err, ids) {
+		var result = [];
+		var counter = 0;
+		ids.forEach(function (key, pos) {
+	    	client.get(key, function(err, companyId) {
+	    		cprofile.companyData(companyId, function(err, data){
+	    			if(!err){
+	    				result.push(data);
+	    				counter++;
+	    				if(counter == ids.length){
+	    					res.send(JSON.stringify(result));
+	    				}
+	    			}
+	    		});
+	    	}); 
+	    });
+	});
+}
+
+exports.companyData = function(companyId, callback){
+	db.table('companyprofile').having('companyId').eq(companyId).scan(
+		function(err, data) {
+		var companies = {};
+		if(!err){
+			companies.id = companyId;
+			companies.name = data[0].companyName;
+			companies.overview = data[0].overview;
+			callback(err, companies);
+		}else{
+			callback(err, companies);
+		}
+	});
+}
+
+exports.logout = function(req, res){
+	res.render('login');
 }

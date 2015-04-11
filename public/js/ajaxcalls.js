@@ -180,6 +180,95 @@ $(document).ready(function(){
               }
           });
           return false;
-      });    
+      }); 
+      
+      
+      $("#cName").autocomplete({
+			delay: 500,
+			minLength: 3,
+			source: function(request, response) {
+				var autocompleteQuery = {
+			    	query : $("#cName").val()
+	    	    };
+				$.ajax({
+		    		  type: "POST",
+		              url: "/company/autocompletelist",
+		              contentType: "application/json; charset=UTF-8",
+		              data: JSON.stringify(autocompleteQuery),
+		              crossDomain : true,
+		              success: function( d ) {
+		            	  response(d);
+		              }
+		    	 });
+			},
+			focus: function(event, ui) {
+				event.preventDefault();
+			},
+			select: function(event, ui) {
+				event.preventDefault();
+				window.location = '/companyprofilepagename/'+ui.item.value;
+			}
+		});
+      
+      $( "#companySearch" ).click(function() {
+          var name = $('#cName').val();
+          var companyname = {
+        	  name : name
+          };
+          
+          $.ajax({
+            type: "POST",
+            url: "/company/companylist",
+            contentType: "application/json; charset=UTF-8",
+            dataType: 'json',
+            data: JSON.stringify(companyname),
+            crossDomain : true,
+            success: function( d ) {
+               var html = '';
+               html += '<div class="panel panel-default">';
+               html += '<div class="panel-heading">';
+               html += '<table class="table"><thead><tr><th>Company Name</th><th>Overview</th></tr></thead><tbody>';
+               for(i=0;i<d.length;i++){
+            	   html += '<tr class="clickable-row" data-href="/companyprofilepagename/'+d[i].name+'"><td>'+d[i].name+'</td><td>'+d[i].overview+'</td></tr>';
+               }      
+               html += ' </tbody></table></div></div>';
+               
+               $('#cprofile').append(html);
+               $(".clickable-row").click(function() {
+                   window.location = $(this).data("href");
+               });
+            }
+          });
+       });
+      
+      $( "#companySearch" ).click(function() {
+    	  var id = $('#companyId').val();
+    	  var name = $('#cName').val();
+    	  var title = $('#jobTitle').val();
+    	  var desc = $('#jobDesc').val();
+    	  var expiry = $('#expiry').val();
+    	  var location = $('#location').val();
+    	  
+          var jobDetails = {
+        	  id : id,
+        	  name : name,
+        	  title : title,
+        	  desc : desc,
+        	  expiry : expiry,
+        	  location : location
+          };
+          
+          $.ajax({
+            type: "POST",
+            url: "/insertJobDetailsPage",
+            contentType: "application/json; charset=UTF-8",
+            dataType: 'json',
+            data: JSON.stringify(jobDetails),
+            crossDomain : true,
+            success: function( d ) {
+            	console.log(d);
+            }
+          });
+      });
 });
         
