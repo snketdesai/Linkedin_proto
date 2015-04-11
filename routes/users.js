@@ -8,17 +8,19 @@ exports.signUp = function(req,res){
 	console.log("Sign up called");
 	var firstName;
 	var lastName;
-	var email = req.body.email;
+	var email;
 	var pwd = req.body.password;
 	var userType = req.body.userType;
 	
 	if(userType == 'C'){
 		firstName  = req.body.companyName;
 		lastName = firstName;
+		email = req.body.companyEmail;
 	}
 	else{
 		firstName = req.body.firstName;
 		lastName = req.body.lastName;
+		email = req.body.email;
 	}
 	user.signUp(email, pwd, firstName, lastName,userType,function(err,data){
 		if(err){
@@ -27,17 +29,13 @@ exports.signUp = function(req,res){
 		}
 		else{	
 			console.log(data);
-<<<<<<< HEAD
-			res.render("homepage");
-=======
 			req.session.userId = data.insertId;
 			if(userType === "U"){
 				 res.render("homepage",{user:req.session.userId});
 			}
 			else if(userType === "C"){
-				res.render('companyhomepage');
+				res.render('companyhomepage');  
 			}
->>>>>>> 272554466e01ee9d247407aaef9156eb86720b8f
 		}
 	});
 }
