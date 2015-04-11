@@ -2,7 +2,8 @@
 
 $.ajax({
     type: "GET",
-    url: "/profile/"+$("#userid").val(),
+    //url: "/profile/"+$("#userid").val(),
+    url: "/profile/"+sessionStorage.userid,
     crossDomain : true,
     contentType: "application/json; charset=UTF-8",
     dataType: 'json',

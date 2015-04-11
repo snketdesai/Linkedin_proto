@@ -5,7 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
-
+var session = require('express-session');
 var http = require('http');
 var path = require('path');
 var profile = require('./routes/profile');
@@ -21,12 +21,17 @@ var fs = require("fs");
 
 var app = express();
 
+app.use(express.cookieParser());
+app.use(express.session({secret: '1234567890QWERTY'}));
+
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views',__dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.favicon());
 app.use(express.logger('dev'));
+app.use(session({secret:'secre session',resave:true,saveUninitialized:true}));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
@@ -39,11 +44,13 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/',index.login);
+app.get('/searchPage', index.search); //returns search page
 
 app.post('/signUp',user.signUp);
 app.post('/signIn',user.signIn);
+app.get('/getUserFromSession',user.getUserFromSession);
 app.post('/checkForExistingUser',user.IsUserPresent);
-app.get('/usersearch/:firstName/:lastName', user.searchUsers);
+app.get('/searchuser/:str', user.searchUsers);
 
 app.post('/application', jobapp.postJobApplication);
 app.get('/userapplication/:userId', jobapp.getJobApplication);

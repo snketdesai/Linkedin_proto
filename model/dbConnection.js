@@ -5,9 +5,17 @@ var dynomoDb;
 var pool;
 
 var $credentials = {
+<<<<<<< HEAD
 		"accessKeyId": "", 
 		"secretAccessKey": "", 
 		"region": "us-west-1"
+=======
+
+		"accessKeyId": "", 
+		"secretAccessKey": "", 
+		"region": ""
+
+>>>>>>> origin/master
 }
 
 function getAWS_SDK(){
@@ -41,11 +49,13 @@ exports.getPoolInstance = function(){
 	else
 	{
 		pool  = mysql.createPool({
-			  host     : 'cmpe282rds.cckbiaous4u7.us-west-1.rds.amazonaws.com',
-			  user     : 'CMPE282RDS',
+
+			  host     : '',
+			  user     : '',
 			  password : '',
-			  port : '3306',
-			  database : 'busi_soc_net'
+			  port : '',
+			  database : ''
+
 			});
 		return pool;
 	}
