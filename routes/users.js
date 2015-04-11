@@ -27,7 +27,13 @@ exports.signUp = function(req,res){
 		}
 		else{	
 			console.log(data);
-			 res.render("homepage");
+			req.session.userId = data.insertId;
+			if(userType === "U"){
+				 res.render("homepage",{user:req.session.userId});
+			}
+			else if(userType === "C"){
+				res.render('companyhomepage');
+			}
 		}
 	});
 }
