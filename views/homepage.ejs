@@ -49,6 +49,8 @@
   <div class="col-md-12">
         <div class="navbar-header">
           
+          <input id="userid" type="hidden" value=<%= user %>>
+
           <a href="#" class="navbar-brand">LinkedIn Prototype</a>
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
           <i class="glyphicon glyphicon-search"></i>
@@ -131,7 +133,9 @@
     
        <div class="col-md-4 col-sm-6">
         <div class="panel panel-default" id="panel">
-           <div class="panel-heading"><h4>Name: </h4></div>
+          <div class="panel-heading"><h4>Name: </h4></div>
+
+
         
           <div class="panel-body">
             
@@ -148,17 +152,9 @@
        <div class="col-md-4 col-sm-6">
         <div class="panel panel-default" id = "panel">
            <div class="panel-heading"><h4>Newsfeed</h4></div>
-          <div class="panel-body">
-            <div class="well well-sm">
-            <div class="media">
-              <div class="media-body">
-                <h4 class="media-heading"></h4>
-                <p>
-                  <!--Post Body -->
-                </p>
-              </div>
-            </div>
-             </div>
+          <div id="panel-body" class="panel-body">
+           
+
           </div>
           </div>
          </div> 

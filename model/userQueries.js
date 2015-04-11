@@ -87,3 +87,38 @@ exports.isUserPresent = function(email,callback){
 		  }); 
 		}); 
 }
+
+exports.getName = function(userId, callback) {
+
+
+	console.log(" userId: " + userId);
+
+	var sql = 'SELECT firstname, lastname FROM users where user_Id = ?';
+
+	console.log(sql);
+
+	pool.getConnection(function(err, connection) {
+
+	connection.query(sql, [ userId ], function(err, rows) {
+
+	console.log(rows);
+
+	if (rows.length !== 0) {
+
+	callback(err, rows);
+
+
+	} else {
+
+	console.log("no users exist with these search parameters");
+
+	callback(err, rows);
+
+	}
+
+	});
+
+
+	});
+
+	}

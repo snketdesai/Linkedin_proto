@@ -55,7 +55,7 @@ app.get('/searchuser/:str', user.searchUsers);
 app.post('/application', jobapp.postJobApplication);
 app.get('/userapplication/:userId', jobapp.getJobApplication);
 app.post('/updatejobstatus/:jobId/:userId', jobapp.updateJobStatus);
-
+app.get('/getName/:userId', user.getName);
 
 app.post('/bio/:userid',profile.insertBio);
 app.post('/certification/:userid',profile.insertCertification);
@@ -63,7 +63,9 @@ app.post('/skill/:userid',profile.insertSkill);
 app.post('/college/:userid',profile.insertCollege);
 app.post('/status/:userid',profile.insertStatus);
 app.post('/company_followed/:userid',profile.insertCompanyFollowed);
-app.post('/user_followed/:userid',profile.insertUserFollowed);
+//app.post('/user_followed/:userid',profile.insertUserFollowed);
+app.post('/user_followed',profile.insertUserFollowed);
+app.post('/posts',profile.insertPost);
 
 app.get('/portfolio',profile.getPortfolio); //portfolio page
 app.get('/profile/:userid',profile.getProfile); //profile data

@@ -13,13 +13,16 @@ $.ajax({
        $("#bio").val(d.Item.bio.S);
        $("#status").val(d.Item.status.S);
              
-       
+       var username = getName(sessionStorage.userid);
+       //alert(username);
+       $('#username').html(username);
        if(d.Item.user_followed)
        {var length_of_user_followed = d.Item.user_followed.SS.length;
        
        for(var i=0;i<length_of_user_followed;i++)
     	   {
-    	   		var html = '<li class="list-group-item">'+d.Item.user_followed.SS[i]+'</li>';
+    	   		var usernameid = getName(d.Item.user_followed.SS[i]);
+    	   		var html = '<li class="list-group-item">'+usernameid+'</li>';
     	   		$('#listForUser').append($(html));
     	   }
        }
@@ -76,9 +79,28 @@ $(document).ready(function(){
     } else {
         
         // $.ajax(); Do Follow
+    	
         $button.css('color','green');
         $button.addClass('following');
         $button.text('Following');
+        
+        var user = new Array();
+        user.push(sessionStorage.userid);
+        
+        var user_followed = {
+        		user_followed : user
+        };
+        $.ajax({
+          type: "POST",
+          url: "/user_followed",
+          contentType: "application/json; charset=UTF-8",
+          dataType: 'json',
+          data: JSON.stringify(user_followed),
+          crossDomain : true,
+          success: function( d ) {
+             console.log(d);
+          }
+        });
     }
 });
 
@@ -95,3 +117,26 @@ $('button.followButton').hover(function(){
     }
 });
 })
+
+function getName(id){
+	
+	var name;
+	
+	$.ajax({
+	    type: "GET",
+	    url: "/getName/"+id,
+	    crossDomain : true,
+	    contentType: "application/json; charset=UTF-8",
+	    dataType: 'json',
+	    async : false,
+	    success: function( d ) {
+	    	
+	    	name = d[0].firstname;
+	    
+	    	//return false;
+	    }
+	
+	});
+	
+	return name;
+}

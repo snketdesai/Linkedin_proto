@@ -1,5 +1,15 @@
 {
+<<<<<<< HEAD
 "accessKeyId": "", 
 "secretAccessKey": "", 
 "region": "us-west-1"
 }
+=======
+	"accessKeyId": "", 
+	"secretAccessKey": "", 
+	"region": ""
+}
+
+
+
+>>>>>>> origin/master
