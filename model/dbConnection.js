@@ -6,9 +6,11 @@ var pool;
 
 var $credentials = {
 
-		"accessKeyId": "", 
-		"secretAccessKey": "", 
-		"region": ""
+		
+			"accessKeyId": "", 
+			"secretAccessKey": "", 
+			"region": ""
+		
 
       
 }

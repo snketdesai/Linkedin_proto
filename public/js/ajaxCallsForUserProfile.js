@@ -21,9 +21,17 @@ $.ajax({
        
        for(var i=0;i<length_of_user_followed;i++)
     	   {
-    	   		var html = '<li class="list-group-item">'+d.Item.user_followed.SS[i]+'</li>';
+    	   		var usernameid = getName(d.Item.user_followed.SS[i]);
+    	   		var html = '<li class="list-group-item">'+usernameid+'</li>';
     	   		$('#listForUser').append($(html));
     	   }
+       
+       
+       $("#college").val(d.Item.college.SS[0]);
+       
+       $("#skill").val(d.Item.skill.SS[0]);
+       
+       $("#certification").val(d.Item.certification.SS[0]);
        
        var length_of_company = d.Item.company_followed.SS.length;
        
@@ -32,11 +40,7 @@ $.ajax({
 	   		var html = '<li class="list-group-item">'+d.Item.company_followed.SS[i]+'</li>';
 	   		$('#listForCompany').append($(html));
 	   }
-       $("#college").val(d.Item.college.SS[0]);
-       
-       $("#skill").val(d.Item.skill.SS[0]);
-       
-       $("#certification").val(d.Item.certification.SS[0]);
+      
        //$("#overviewText").val(d.data[0].overview);
        //$("#urlText").val(d.data[0].url);
     }
@@ -282,3 +286,26 @@ $(document).ready(function(){
 							        //$("#certification").prop('disabled', true);
 							      });
 })
+
+function getName(id){
+	
+	var name;
+	
+	$.ajax({
+	    type: "GET",
+	    url: "/getName/"+id,
+	    crossDomain : true,
+	    contentType: "application/json; charset=UTF-8",
+	    dataType: 'json',
+	    async : false,
+	    success: function( d ) {
+	    	
+	    	name = d[0].firstname;
+	    
+	    	//return false;
+	    }
+	
+	});
+	
+	return name;
+}
