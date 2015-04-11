@@ -27,7 +27,17 @@ exports.signUp = function(req,res){
 		}
 		else{	
 			console.log(data);
+<<<<<<< HEAD
 			res.render("homepage");
+=======
+			req.session.userId = data.insertId;
+			if(userType === "U"){
+				 res.render("homepage",{user:req.session.userId});
+			}
+			else if(userType === "C"){
+				res.render('companyhomepage');
+			}
+>>>>>>> 272554466e01ee9d247407aaef9156eb86720b8f
 		}
 	});
 }
