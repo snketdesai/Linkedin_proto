@@ -111,10 +111,31 @@ exports.insertCompanyFollowed = function(req,res){
 }
 exports.insertUserFollowed = function(req,res){
 	
-	var userid = req.params.userid;
+	//var userid = req.params.userid;
+	var userid = req.session.userId;
 	var user_followed = req.body.user_followed;
 	
-	profile.updateUserFollowed(userid,user_followed,function(err,data){
+	profile.updateUserFollowed(userid.toString(),user_followed,function(err,data){
+		
+		if(err){
+			  res.writeHead(400);
+			  res.end("Error while inserting data\n");
+		}
+		else{		
+			 res.writeHead(200);
+			 res.end("Record Inserted successfully");
+			
+		}
+		
+	});
+	
+}
+
+exports.insertPost = function(req,res){
+	var userid = req.session.userId;
+	var post = req.body.post;
+	
+	profile.insertPost(userid.toString(),post,function(err,data){
 		
 		if(err){
 			  res.writeHead(400);

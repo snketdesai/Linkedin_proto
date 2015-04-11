@@ -184,6 +184,32 @@ exports.updateUserFollowed = function(userid,user_followed,callback){
 		});
 },
 
+exports.insertPost = function(userid,post,callback){
+	
+	dynamo.updateItem(
+		    {"TableName":"user_profile",
+		        "Key":{
+		            "user_id":{"S":userid}
+		              
+		        },
+		        "AttributeUpdates":{
+		        	"post":{
+		        		"Value" :{
+		        			"SS":post
+		        		},
+		        	
+		        	"Action":"ADD"
+		        	}
+		        }
+		    }, function(err,data) {
+		    	if(err)
+		    		console.log("Error______"+err);
+					callback(err, data);
+		});
+	
+},
+
+
 exports.getProfileInfo = function(userid,callback){
 	
 	dynamo.getItem({
@@ -203,4 +229,9 @@ exports.getProfileInfo = function(userid,callback){
 				console.log("error:"+err);
 			callback(err,data);
 	})
+		
 }
+
+
+
+

@@ -76,9 +76,28 @@ $(document).ready(function(){
     } else {
         
         // $.ajax(); Do Follow
+    	
         $button.css('color','green');
         $button.addClass('following');
         $button.text('Following');
+        
+        var user = new Array();
+        user.push(sessionStorage.userid);
+        
+        var user_followed = {
+        		user_followed : user
+        };
+        $.ajax({
+          type: "POST",
+          url: "/user_followed",
+          contentType: "application/json; charset=UTF-8",
+          dataType: 'json',
+          data: JSON.stringify(user_followed),
+          crossDomain : true,
+          success: function( d ) {
+             console.log(d);
+          }
+        });
     }
 });
 

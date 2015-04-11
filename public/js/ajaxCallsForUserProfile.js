@@ -253,4 +253,32 @@ $(document).ready(function(){
 						        $("#addCertification").show();
 						        $("#certification").prop('disabled', true);
 						      });
+						      
+						      // ------------edit certification ends here-------
+						      
+						      $( "#postStatus" ).click(function() {
+							        var status = $("#statusText").val();
+							        var postStatus = new Array();
+							        postStatus.push(status);
+							        
+							        var postObject = {
+							        		post : postStatus
+							        };
+							        
+							        $.ajax({
+							          type: "POST",
+							          url: "/posts",
+							          contentType: "application/json; charset=UTF-8",
+							          dataType: 'json',
+							          data: JSON.stringify(postObject),
+							          crossDomain : true,
+							          success: function( d ) {
+							             console.log(d);
+							          }
+							        });
+							        $('#statusText').val('');
+							        //$("#saveCertification").hide();
+							        //$("#addCertification").show();
+							        //$("#certification").prop('disabled', true);
+							      });
 })

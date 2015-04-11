@@ -6,10 +6,9 @@ var pool;
 
 var $credentials = {
 
-		"accessKeyId": "", 
-		"secretAccessKey": "", 
-		"region": ""
-
+       
+        	
+        	
 }
 
 function getAWS_SDK(){
@@ -44,11 +43,7 @@ exports.getPoolInstance = function(){
 	{
 		pool  = mysql.createPool({
 
-			  host     : '',
-			  user     : '',
-			  password : '',
-			  port : '',
-			  database : ''
+			
 
 			});
 		return pool;
