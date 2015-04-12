@@ -5,24 +5,15 @@ var dynomoDb;
 var pool;
 
 var $credentials = {
-<<<<<<< HEAD
+
 		"accessKeyId": "", 
 		"secretAccessKey": "", 
 		"region": "us-west-1"
-=======
 
-		
-			"accessKeyId": "", 
-			"secretAccessKey": "", 
-			"region": ""
-		
-
-      
->>>>>>> origin/master
 }
 
 function getAWS_SDK(){
-	AWS.config.loadFromPath('./public/access.json');
+//	AWS.config.loadFromPath('./public/access.json');
 
 	var aws = new AWS.DynamoDB();
 	
